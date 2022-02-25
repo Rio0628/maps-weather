@@ -1,6 +1,6 @@
 import React from 'react';
 import { TiWeatherCloudy } from 'react-icons/ti';
-import { MdArrowForwardIos } from 'react-icons/md';
+import { MdArrowForwardIos, MdOutlineRemove } from 'react-icons/md';
 
 const SavedLocsCntr = () => {
     return (
@@ -19,6 +19,38 @@ const SavedLocsCntr = () => {
                 <p className='crrntWthr'>00*C / 00*F</p>
 
                 <p className='crrntWthrTxt'>Crrnt Weather</p>
+            </div>
+
+            <div className='wthrHrlCntr'>
+                <div className='indHrlFrcst'>
+                    <div className='timeWthr'>00am</div>
+
+                    <div className='indHrlIcon'><TiWeatherCloudy className='logo' /></div>
+
+                    <p className='frcstTemp'>00*C</p>
+                </div>
+
+                
+            </div>
+
+            <div className='othrSavedLocsCntr'>
+                <p className='savedLocsTitle'>Other Saved Locations</p>
+
+                <div className='locationsCntr'>
+                    <div className='indSavedLoc'>
+                        <p className='locName'>Location</p>
+
+                        <div className='indLocBtns'>
+
+                            <p className='setLocMain'>Set main</p>
+
+                            <div className='removeLocBtn'>
+                                <p>Remove</p>
+                                <MdOutlineRemove className='logo'/>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
             </div>
         </div>
     );

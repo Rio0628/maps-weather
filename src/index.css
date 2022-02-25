@@ -98,7 +98,7 @@ code {
 .savedLocsCntr {
   position: absolute;
   background: #161d1d;
-  height: 100%;
+  height: 200%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -130,11 +130,18 @@ code {
   cursor: pointer;
 }
 
-.returnMainViewBtn:hover {
+.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover {
   color:#161d1d;
   background: #fff;
   transition: .1s linear;
 }
+
+.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active {
+  color:#fff;
+  background: #161d1d;
+  transition: none;
+}
+
 
 .returnMainViewBtn .logo {
   position: relative;
@@ -144,13 +151,13 @@ code {
 
 .mainWthrLocCntr {
   position: relative;
-  top: 5rem;
+  top: 4.5rem;
   width: 100%;
   height: 22rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  outline: 1px solid magenta;
+  /* outline: 1px solid magenta; */
 }
 
 .wthrLocName, .crrntWthr {
@@ -160,7 +167,7 @@ code {
   text-align: center;
   letter-spacing: 2px;
   font-size: 35px;
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
 }
 
 .locCrrntWthr {
@@ -170,7 +177,7 @@ code {
   height: 5rem;
   display: flex;
   align-items: center;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 
 .crrntWthr {
@@ -180,7 +187,7 @@ code {
   font-weight: 600;
   letter-spacing: 0;
   font-family: 'Courier Prime';
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 
 .crrntWthrTxt {
@@ -189,16 +196,148 @@ code {
   font-size: 23px;
   width: 90%;
   text-align: center;
-  outline: 1px solid yellow;
+  /* outline: 1px solid yellow; */
 }
 
-/* 
-me='mainWthrLocCntr'>
-                <p className='wthrLocName'>Location</p>
+.wthrHrlCntr {
+  position: relative;
+  top: 5.5rem;
+  width: 100%;
+  height: 7.5rem;
+  display: flex;
+  /* outline: 1px solid blue; */
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
 
-                <div className='locCrrntWthr'><TiWeatherCloudy className='logo'/></div>
+.wthrHrlCntr::-webkit-scrollbar {
+  width: 0px; 
+}
 
-                <p className='crrntWthr'>00*C / 00*F</p>
+.indHrlFrcst {
+  position: relative;
+  min-width: 6rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* outline: 1px solid red; */
+  /* background: blue; */
+  box-shadow: 2px 2px 1px #fff;
+}
 
-                <p className='crrntWthrTxt'>
+.timeWthr {
+  position: relative;
+  top: 2px;
+  font-size: 20px;
+  /* outline: 1px solid red; */
+}
+
+.indHrlIcon {
+  position: relative;
+  top: 2px;
+  height: 2rem;
+  font-size: 40px;
+}
+
+.frcstTemp {
+  position: relative;
+  /* top: 5px; */
+}
+
+.othrSavedLocsCntr {
+  position: relative;
+  top: 7rem;
+  min-height: 20rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* outline: 1px solid  red; */
+}
+
+.savedLocsTitle {
+  width: 90%;
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Titillium Web';
+  font-weight: 800;
+  letter-spacing: 2px;
+  /* outline: 1px solid red; */
+}
+
+.locationsCntr {
+  width: 100%;
+  height: 60%;
+  /* display: flex; */
+  /* outline: 1px solid green; */
+}
+
+.indSavedLoc {
+  position: relative;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: #666; */
+  /* outline: 1px solid magenta; */
+  box-shadow: 2px 2px 2px #fff, -2px -2px 2px #fff;
+}
+
+.locName {
+  position: relative;
+  bottom: .8rem;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  /* outline: 1px solid red; */
+}
+
+.indLocBtns {
+  position: relative;
+  bottom: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* outline: 1px solid blue; */
+}
+
+.setLocMain {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  outline: 1px solid #fff;
+}
+
+.removeLocBtn {
+  height: 1.5rem;
+  width: 7rem;
+  padding: 2px 2px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 2px;
+  cursor: pointer;
+  outline: 1px solid #fff;
+}
+
+.removeLocBtn .logo { font-size: 25px; }
+/* ='othrSavedLocsCntr'>
+                <p className='savedLocsTitle'>Other Saved Locations</p>
+
+                <div className='locationsCntr'>
+                    <div className='indSavedLoc'>
+                        <p className='locName'>Location</p>
+
+                        <div className='indLocBtns'>
+
+                            <div className='removeLocBtn'><MdOutlineRemove className='logo'/></div>
+                            <p className='setLocMain'>Set
 */
