@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import ReactMapGl from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
