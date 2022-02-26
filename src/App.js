@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { TiWeatherCloudy } from 'react-icons/ti';
-import { Map, SavedLocsCntr } from './components';
+import { Map, SavedLocsCntr, CurrentWeather } from './components';
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +31,10 @@ class App extends Component {
 
         <div className='cntrOpenWeather'><div className='openWeatherBtn'><TiWeatherCloudy className='logo' /></div></div>
 
-        <SavedLocsCntr />
+        {/* <SavedLocsCntr /> */}
+      
+        <CurrentWeather />
+
       </div>
     );
   }

@@ -95,7 +95,7 @@ code {
 
 /* -- SAVED LOCS STYLING -- */
 
-.savedLocsCntr {
+.savedLocsCntr, .currentWeatherCntr {
   position: absolute;
   background: #161d1d;
   height: 200%;
@@ -105,10 +105,7 @@ code {
   align-items: center;
   z-index: 5;
   color: #fff;
-}
-
-.savedLocsCntr h1 {
-  margin-top: 20rem;
+  outline: 3px solid #161d1d;
 }
 
 .returnMainViewBtn {
@@ -329,15 +326,77 @@ code {
 }
 
 .removeLocBtn .logo { font-size: 25px; }
-/* ='othrSavedLocsCntr'>
-                <p className='savedLocsTitle'>Other Saved Locations</p>
 
-                <div className='locationsCntr'>
-                    <div className='indSavedLoc'>
-                        <p className='locName'>Location</p>
+/* -- CURRENT WEATHER STYLES -- */
 
-                        <div className='indLocBtns'>
+.currentWeatherCntr .returnMainViewBtn {
+  left: .8rem;
+  right: 0px;
+  padding: 0px 10px 2px 10px; 
+} 
 
-                            <div className='removeLocBtn'><MdOutlineRemove className='logo'/></div>
-                            <p className='setLocMain'>Set
+.saveWhtrLocBtn {
+  position: relative;
+  bottom: 4rem;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  outline: 2px solid #fff;
+  border-radius: 2px;
+  padding: 5px 20px;
+}
+
+.currentWeatherCntr .wthrHrlCntr {
+  top: 8rem;
+}
+
+.ftrFrcstHeading {
+  position: relative;
+  top: 8rem;
+  font-size: 25px;
+  font-family: 'Titillium Web';
+  font-weight: 800;
+  letter-spacing: 3px;
+  /* outline: 1px solid red; */
+}
+
+.ftrFrcstCntr {
+  position: relative;
+  top: 7.5rem;
+  width: 100%;
+  /* outline: 1px solid red; */
+}
+
+.indFrcst {
+  height: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* outline: 1px solid #fff; */
+  box-shadow: 0px 3px 0px #fff;
+}
+
+.indFrcst:nth-child(1) { box-shadow: 0px 3px 0px #fff, 0px -3px 0px #fff; }
+
+.frcstDay, .lowTemp, .highTemp {
+  font-size: 20px; 
+  /* outline: 1px solid red; */
+}
+
+.WthrIcon {
+  display: flex;
+  font-size: 35px;
+  /* outline: 1px solid red; */
+}
+
+
+/* ftrFrcstCntr'>
+                <div className='indFrcst'>
+                    <p className='frcstDay'>Day</p>
+
+                    <div className='WthrIcon'><TiWeatherCloudy className='logo'/></div>
+
+                    <p className='lowTemp'>00*C</p>
+
+                    <p className='highTemp'>0
 */
