@@ -390,6 +390,25 @@ code {
 }
 
 
+.animBG {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient( #87ceeb, #45b3e0); */
+  background: linear-gradient( #5bbce4, #45b3e0);
+  z-index: 9;
+}
+
+.sunny {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 12rem;
+  color: gold;
+}
+
 /* ftrFrcstCntr'>
                 <div className='indFrcst'>
                     <p className='frcstDay'>Day</p>

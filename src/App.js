@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { Map, SavedLocsCntr, CurrentWeather } from './components';
+import CurrentWeatherBG from './components/CurrentWeatherBG';
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class App extends Component {
 
         {/* <SavedLocsCntr /> */}
       
-        <CurrentWeather />
+        {/* <CurrentWeather /> */}
+
+        <CurrentWeatherBG />
 
       </div>
     );
