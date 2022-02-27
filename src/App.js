@@ -34,9 +34,8 @@ class App extends Component {
 
         {/* <SavedLocsCntr /> */}
       
-        {/* <CurrentWeather /> */}
+        <CurrentWeather />
 
-        <CurrentWeatherBG />
 
       </div>
     );

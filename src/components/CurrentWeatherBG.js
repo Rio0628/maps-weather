@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { RiSunFill } from 'react-icons/ri';
-import { BsCloudFill } from 'react-icons/bs';
+import { BsCloudFill, BsFillMoonFill } from 'react-icons/bs';
 import { FaSnowflake } from 'react-icons/fa';
 import { GiWaterDrop } from 'react-icons/gi';
 import { WiWindy } from 'react-icons/wi';
@@ -8,7 +8,7 @@ import gsap from 'gsap';
 
 const CurrentWeatherBG = () => {
 
-    const sunnyRef = useRef(null);
+    const sunMoonRef = useRef(null);
     const cloudref = useRef([]);
     const dropsRef = useRef([]);
     const mistRef = useRef([]);
@@ -47,20 +47,20 @@ const CurrentWeatherBG = () => {
     useEffect(() => {
         // console.log(mainRef.current.clientWidth)
         setCntrWidth(mainRef.current.clientWidth);
-        // console.log(sunnyRef.current)    
+        // console.log(sunMoonRef.current)    
 
         // Sunny background
-        gsap.to(sunnyRef.current, { rotation: '360', yoyo: true, ease: 'none', duration: 11, repeat: -1});
+        gsap.to(sunMoonRef.current, { rotation: '45', yoyo: true, ease: 'none', duration: 11, repeat: -1});
 
         // Partly Cloudy Animations
-        cloudref.current.forEach( (el) => {
-            gsap.to(el, { x: '+=100', ease: 'none', yoyo: true, repeat: -1, duration: 11 })
-        });
+        // cloudref.current.forEach( (el) => {
+        //     gsap.to(el, { x: '+=100', ease: 'none', yoyo: true, repeat: -1, duration: 11 })
+        // });
 
         // Coudy Animations
-        // cloudref.current.forEach( (el) => {
-        //     gsap.to(el, { x: '+=50', ease: 'none', repeat: -1, duration: 2 });
-        // });
+        cloudref.current.forEach( (el) => {
+            gsap.to(el, { x: '+=50', ease: 'none', repeat: -1, yoyo: true, duration: 8 });
+        });
 
         // Drizzle Animations
         // dropsRef.current.forEach( (el) => {
@@ -68,9 +68,9 @@ const CurrentWeatherBG = () => {
         // });
 
         // Rain Animations
-        // dropsRef.current.forEach( (el) => {
-        //     gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 6) + 2 })
-        // });
+        dropsRef.current.forEach( (el) => {
+            gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 6) + 2 })
+        });
 
         // Mist Animations
         mistRef.current.forEach( (el) => {
@@ -81,13 +81,18 @@ const CurrentWeatherBG = () => {
 
     return (
         <div className='animBG' ref={mainRef}>
-            {/*     
-            <div className='BG sunny'>
-                <div className='sunny' ref={sunnyRef}><RiSunFill /></div>
+                
+            {/* <div className='BG sunny'>
+                <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
             </div> */}
 
-            <div className='BG partlyCloudy'>
-                <div className='sun' ref={sunnyRef}><RiSunFill /></div>
+                
+            {/* <div className='BG night'>
+                <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
+            </div> */}
+
+            {/* <div className='BG partlyCloudy'>
+                <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
 
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
@@ -96,7 +101,19 @@ const CurrentWeatherBG = () => {
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-            </div>
+            </div> */}
+
+            {/* <div className='BG partlyCloudy night'>
+                <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
+
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+            </div> */}
 
             {/* <div className='BG cloudy'>
                 <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
@@ -134,8 +151,7 @@ const CurrentWeatherBG = () => {
                     <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
                     <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
                     <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                </div>
-                
+                </div> 
             </div>  */}
 
             {/* <div className='BG rain'>
@@ -245,14 +261,14 @@ const CurrentWeatherBG = () => {
                 <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
             </div> */}
 
-            {/* <div className='BG rain'>
+            <div className='BG rain'>
                         
                 <div className='mist' ref={addMistRef} ><WiWindy /></div>
                 <div className='mist' ref={addMistRef} ><WiWindy /></div>
                 <div className='mist' ref={addMistRef} ><WiWindy /></div>
                 <div className='mist' ref={addMistRef} ><WiWindy /></div>
                 <div className='mist' ref={addMistRef} ><WiWindy /></div>
-            </div> */}
+            </div>
         
             
         </div>

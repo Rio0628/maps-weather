@@ -50,12 +50,16 @@ code {
   font-size: 28px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* outline: 1px solid red; */
   cursor: pointer;
   color: #fff;
   /* flex-direction: column; */
 }
 
-.searchBtn { padding-left: 4px; }
+.searchBtn { 
+  width: 20%;
+  padding-left: 4px; }
 
 .openWeatherBtn { 
   font-size: 35px; 
@@ -78,9 +82,9 @@ code {
 
 .mapContainer {
   position: absolute;
-  height: 90vh;
+  height: 100vh;
   width: 100vw; 
-  z-index: 3;
+  /* z-index: 3; */
 }
 
 .map {
@@ -220,7 +224,8 @@ code {
   align-items: center;
   /* outline: 1px solid red; */
   /* background: blue; */
-  box-shadow: 2px 2px 1px #fff;
+  /* box-shadow: 2px 0px 1px #fff; */
+  border-right: 2px solid #fff;
 }
 
 .timeWthr {
@@ -329,7 +334,17 @@ code {
 
 /* -- CURRENT WEATHER STYLES -- */
 
+.wthrInfoCntr {
+  position: relative;
+  height: 200%;
+  width: 100%;
+  z-index: 3; 
+  background: rgba(22, 29, 29, .15);
+  backdrop-filter: blur(10px);
+}
+
 .currentWeatherCntr .returnMainViewBtn {
+  /* height: 200%; */
   left: .8rem;
   right: 0px;
   padding: 0px 10px 2px 10px; 
@@ -356,6 +371,7 @@ code {
   font-size: 25px;
   font-family: 'Titillium Web';
   font-weight: 800;
+  text-align: center;
   letter-spacing: 3px;
   /* outline: 1px solid red; */
 }
@@ -391,11 +407,12 @@ code {
 
 
 .animBG {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   outline: 1px solid red;
   z-index: 9;
+  overflow: hidden;
 }
 
 .BG {
@@ -404,6 +421,8 @@ code {
 }
 
 .BG.sunny { background: linear-gradient( #5bbce4, #45b3e0); }
+
+.BG.night, .BG.partlyCloudy.night { background: linear-gradient( #0c1445, #38285c); }
 
 .BG.partlyCloudy { background: linear-gradient( #5bbce4, #45b3e0);}
 
@@ -415,7 +434,7 @@ code {
 
 .BG.thunderstorm { background: linear-gradient( #97a5aa, #273440); }
 
-.sun {
+.sun, .moon {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -424,6 +443,8 @@ code {
   font-size: 12rem;
   color: #fed553;
 }
+
+.moon { color: #fff; }
 
 .partlyCloud, .cloud {
   position: absolute;
@@ -623,13 +644,70 @@ code {
   left: 5rem;
 }
 
-/*  < <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-                <div className='drop'><GiWaterDrop /></div>
-*/
+@media screen and (min-width: 500px ) {
+  .headerBtnsContainer { width: 28rem; }
+
+  .searchbarCntr { 
+    height: 2.25rem; 
+    /* width: 90%; */
+  }
+
+  .searchbar {
+    width: 85%;
+  }
+
+  .searchBtn {
+    width: 15%;
+    padding: 0;
+    font-size: 32px;
+  }
+
+  .openMenuBtn, .openWeatherBtn {
+    font-size: 40px;
+  }
+
+  .openWeatherBtn {
+    position: absolute;
+    top: 25px;
+    right: -5.15rem;
+    padding: 2px 7px;
+  }
+
+  .sun, .moon {
+    top: 2rem;
+    right: 5rem;
+  }
+
+  .partlyCloud:nth-child(3), .cloud:nth-child(7) { right: 5rem; }
+
+  .partlyCloud:nth-child(4), .cloud:nth-child(8) { left: -1rem; }
+
+  .partlyCloud:nth-child(6), .cloud:nth-child(10) { right: -4rem; }
+
+  .partlyCloud:nth-child(7), .cloud:nth-child(11) { right: 9rem; }
+
+  .partlyCloud:nth-child(2), .cloud:nth-child(6) { left: 5rem; }
+
+  .partlyCloud:nth-child(1) { left: -5rem; }
+
+  .partlyCloud:nth-child(8), .cloyd:nth-child(12) { left: -8rem; }
+
+  .cloud:nth-child(2), .cloud:nth-child(3) { right: 2rem; }
+
+  .cloud:nth-child(4) { right: -1.5rem; }
+
+  .cloud:nth-child(1) { left: 6rem; }
+
+  .cloud:nth-child(13) { left: 7rem; }
+
+  .mist:nth-child(1) { left: 8rem; }
+
+  .mist:nth-child(2) { left: 20rem; }
+
+  .mist:nth-child(3) { left: 4rem; }
+
+  .mist:nth-child(4) { left:23rem; }
+
+  .mist:nth-child(5) { left: 8rem; }
+
+}
