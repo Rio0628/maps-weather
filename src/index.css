@@ -394,7 +394,7 @@ code {
   position: absolute;
   height: 100%;
   width: 100%;
-  /* background: linear-gradient( #87ceeb, #45b3e0); */
+  outline: 1px solid red;
   z-index: 9;
 }
 
@@ -525,14 +525,14 @@ code {
   left: -8rem;
 }
 
-.dropsCntr {
+.dropsCntr, .cloudsCntr {
   position: absolute;
   height: 100%;
   width: 100%;
   /* background: red; */
 }
 
-.drop, .flake{
+.drop, .flake, .mist{
   position: absolute;
   top: 3rem;
   /* transform: translateX(100px);  */
@@ -543,7 +543,9 @@ code {
   z-index: 1; 
 }
 
-.flake { color: #fffafa; }
+.flake, .mist { color: #fffafa; }
+
+.mist { font-size: 8rem; }
 
 .drop:nth-child(even) {
   color: #53789e;
@@ -594,6 +596,31 @@ code {
     94% { opacity: 0.2; }
     96% { opacity: 1; } 
 	to { opacity: 0; }
+}
+
+.mist:nth-child(1) {
+  top: 2rem;
+  left: 2rem;
+}
+
+.mist:nth-child(2) {
+  top: 8rem;
+  left: 10rem;
+}
+
+.mist:nth-child(3) {
+  top: 14rem;
+  left: 1rem;
+}
+
+.mist:nth-child(4) {
+  top: 22rem;
+  left: 13rem;
+}
+
+.mist:nth-child(5) {
+  top: 28rem;
+  left: 5rem;
 }
 
 /*  < <div className='drop'><GiWaterDrop /></div>
