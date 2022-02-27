@@ -409,6 +409,8 @@ code {
 
 .BG.cloudy { background: linear-gradient( #dbdcdc, #97a5aa);}
 
+.BG.drizzle { background: linear-gradient( #dbdcdc, #5bbce4);}
+
 .sun {
   position: absolute;
   top: 1rem;
@@ -423,6 +425,7 @@ code {
   position: absolute;
   font-size: 12rem;
   display: flex;
+  z-index: 2;
   /* outline: 1px solid red; */
 }
 
@@ -465,6 +468,12 @@ code {
   left: -2rem;
   opacity: 1;
   color: #a2aeb3;
+}
+
+.partlyCloud:nth-child(1) {
+  top: -2rem;
+  left: -12rem;
+  color: #6d7f85;
 }
 
 .partlyCloud:nth-child(8), .cloud:nth-child(12) {
@@ -512,11 +521,37 @@ code {
   left: -8rem;
 }
 
+.dropsCntr {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  /* background: red; */
+}
+
+.drop {
+  position: absolute;
+  top: 3rem;
+  /* transform: translateX(100px);  */
+  /* font-size: 1.2rem; */
+  color: #92bad2; 
+  /* left: 2rem; */
+  /* transform: rotate(20deg); */
+  z-index: 1; 
+}
+
+.drop:nth-child(even) {
+  color: #53789e;
+}
 
 
-/*  <div className='partlyCloud'><BsCloudFill /></div>
-    <div className='partlyCloud'><BsCloudFill /></div>
-    <div className='partlyCloud'><BsCloudFill /></div>
-    <div className='partlyCloud'><BsCloudFill /></div>
-    <div className='partlyCloud'><
+
+/*  < <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
+                <div className='drop'><GiWaterDrop /></div>
 */
