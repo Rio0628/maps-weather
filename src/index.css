@@ -407,7 +407,9 @@ code {
 
 .BG.partlyCloudy { background: linear-gradient( #5bbce4, #45b3e0);}
 
-.BG.cloudy { background: linear-gradient( #dbdcdc, #97a5aa);}
+.BG.cloudy, .BG.rain{ background: linear-gradient( #dbdcdc, #97a5aa);}
+
+.BG.snow { background: linear-gradient( #dbdcdc, #97a5aa);}
 
 .BG.drizzle { background: linear-gradient( #dbdcdc, #5bbce4);}
 
@@ -528,7 +530,7 @@ code {
   /* background: red; */
 }
 
-.drop {
+.drop, .flake{
   position: absolute;
   top: 3rem;
   /* transform: translateX(100px);  */
@@ -538,6 +540,8 @@ code {
   /* transform: rotate(20deg); */
   z-index: 1; 
 }
+
+.flake { color: #fff; }
 
 .drop:nth-child(even) {
   color: #53789e;
