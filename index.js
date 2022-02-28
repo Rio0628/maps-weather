@@ -6,10 +6,6 @@ let corsOptions = { origin: 'http://localhost:8081' };
 
 db.sequelize.sync();
 
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and re-sync db.');
-});
-
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
