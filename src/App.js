@@ -34,7 +34,7 @@ class App extends Component {
 
         {/* <SavedLocsCntr /> */}
       
-        <CurrentWeather />
+        <CurrentWeather  />
 
 
       </div>

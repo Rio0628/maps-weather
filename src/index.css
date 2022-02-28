@@ -283,8 +283,11 @@ code {
   align-items: center;
   /* background: #666; */
   /* outline: 1px solid magenta; */
-  box-shadow: 2px 2px 2px #fff, -2px -2px 2px #fff;
+  /* box-shadow: 0px 2px 0px #fff, 0px -2px 0px #fff; */
+  border-bottom: 2px solid #fff;
 }
+
+.indSavedLoc:nth-child(1) { border-top: 2px solid #fff; }
 
 .locName {
   position: relative;
@@ -339,6 +342,9 @@ code {
   height: 200%;
   width: 100%;
   z-index: 3; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: rgba(22, 29, 29, .15);
   backdrop-filter: blur(10px);
 }
@@ -389,10 +395,11 @@ code {
   justify-content: space-evenly;
   align-items: center;
   /* outline: 1px solid #fff; */
-  box-shadow: 0px 3px 0px #fff;
+  /* box-shadow: 0px 3px 0px #fff; */
+  border-bottom: 2px solid #fff;
 }
 
-.indFrcst:nth-child(1) { box-shadow: 0px 3px 0px #fff, 0px -3px 0px #fff; }
+.indFrcst:nth-child(1) { border-top: 2px solid #fff; }
 
 .frcstDay, .lowTemp, .highTemp {
   font-size: 20px; 
@@ -679,35 +686,61 @@ code {
   }
 
   .partlyCloud:nth-child(3), .cloud:nth-child(7) { right: 5rem; }
-
   .partlyCloud:nth-child(4), .cloud:nth-child(8) { left: -1rem; }
-
   .partlyCloud:nth-child(6), .cloud:nth-child(10) { right: -4rem; }
-
   .partlyCloud:nth-child(7), .cloud:nth-child(11) { right: 9rem; }
-
   .partlyCloud:nth-child(2), .cloud:nth-child(6) { left: 5rem; }
-
   .partlyCloud:nth-child(1) { left: -5rem; }
-
   .partlyCloud:nth-child(8), .cloyd:nth-child(12) { left: -8rem; }
 
-  .cloud:nth-child(2), .cloud:nth-child(3) { right: 2rem; }
-
+  .cloud:nth-child(2), .cloud:nth-child(3) { right: 3rem; }
   .cloud:nth-child(4) { right: -1.5rem; }
-
   .cloud:nth-child(1) { left: 6rem; }
-
   .cloud:nth-child(13) { left: 7rem; }
-
+  
   .mist:nth-child(1) { left: 8rem; }
-
   .mist:nth-child(2) { left: 20rem; }
-
   .mist:nth-child(3) { left: 4rem; }
-
   .mist:nth-child(4) { left:23rem; }
-
   .mist:nth-child(5) { left: 8rem; }
+}
+
+@media screen and  (min-width: 700px) {
+  .headerBtnsContainer { width: 32rem; }
+
+  .openWeatherBtn { right: -6.9rem; }
+
+  .returnMainViewBtn { right: 3.2rem; }
+
+  .wthrHrlCntr, .currentWeatherCntr .whtrHrlCntr { width: 87%; }
+
+  .othrSavedLocsCntr, .ftrFrcstCntr { width: 80%; }
+
+  .currentWeatherCntr .returnMainViewBtn { left: 3.2rem; }
+
+  .partlyCloud:nth-child(3), .cloud:nth-child(7) { right: 12rem; }
+  .partlyCloud:nth-child(4), .cloud:nth-child(8) { left: 6rem; }
+  .partlyCloud:nth-child(6), .cloud:nth-child(10) { right: 3rem; }
+  .partlyCloud:nth-child(7), .cloud:nth-child(11) { right: 16rem; } /* Finished here */
+  .partlyCloud:nth-child(2), .cloud:nth-child(6) { left: 12rem; }
+  .partlyCloud:nth-child(1) { left: 2rem; }
+  .partlyCloud:nth-child(8), .cloyd:nth-child(12) 
+  { 
+    top: 3rem;
+    left: -1rem; 
+  }
+
+  .cloud:nth-child(12) { left: 8rem; }
+  .cloud:nth-child(4) { right: 6.5rem; }
+  .cloud:nth-child(1) { left: 13rem; }
+  .cloud:nth-child(10) { right: 6rem; }
+
+  .mist { font-size: 12rem; }
+
+
+  .mist:nth-child(1) { left: 10rem; }
+  .mist:nth-child(2) { left: 27rem; }
+  .mist:nth-child(3) { left: 7rem; }
+  .mist:nth-child(5) { left: 14rem; }
 
 }

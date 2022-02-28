@@ -114,8 +114,8 @@ const CurrentWeatherBG = () => {
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
             </div> */}
-
-            {/* <div className='BG cloudy'>
+{/* 
+            <div className='BG cloudy'>
                 <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>

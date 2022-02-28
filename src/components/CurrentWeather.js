@@ -27,7 +27,7 @@ const CurrentWeather = () => {
                     <p className='saveWhtrLocBtn'>Save Location</p>
                 </div>
             
-                <div className='wthrHrlCntr'>
+                <div className='wthrHrlCntr' id='wthrHrlCntr'>
                     <div className='indHrlFrcst'>
                         <div className='timeWthr'>00am</div>
 
