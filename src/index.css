@@ -16,8 +16,18 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* overflow: hidden; */
   font-family: 'Open Sans'; 
   /* background: red; */
+}
+
+.map-headerCntr {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
 
 .headerBtnsContainer {
@@ -272,7 +282,7 @@ code {
   width: 100%;
   height: 60%;
   /* display: flex; */
-  /* outline: 1px solid green; */
+  outline: 1px solid green;
 }
 
 .indSavedLoc {
@@ -284,6 +294,7 @@ code {
   /* background: #666; */
   /* outline: 1px solid magenta; */
   /* box-shadow: 0px 2px 0px #fff, 0px -2px 0px #fff; */
+  padding: 10px 0px;
   border-bottom: 2px solid #fff;
 }
 
@@ -365,7 +376,10 @@ code {
   outline: 2px solid #fff;
   border-radius: 2px;
   padding: 5px 20px;
+  cursor: pointer;
 }
+
+.saveWhtrLocBtn:hover { color: red; }
 
 .currentWeatherCntr .wthrHrlCntr {
   top: 8rem;
@@ -418,7 +432,7 @@ code {
   height: 100%;
   width: 100%;
   outline: 1px solid red;
-  z-index: 9;
+  /* z-index: 9; */
   overflow: hidden;
 }
 
@@ -742,5 +756,98 @@ code {
   .mist:nth-child(2) { left: 27rem; }
   .mist:nth-child(3) { left: 7rem; }
   .mist:nth-child(5) { left: 14rem; }
+}
+
+@media screen and (min-width: 1000px) {
+  
+  .container {
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .map-headerCntr {
+    position: relative;
+    width: 100%;
+    outline: 1px solid red;
+    /* background: red; */
+  }
+
+  .openMenuBtn {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .savedLocsCntr {
+    position: relative;
+    height: 100%;
+    width: 32rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* padding-bottom: 4rem; */
+    /* opacity: 0; */
+  }
+
+  .searchbarCntr {
+    position: absolute;
+    left: -1rem;
+    /* height: 2.8 rem; */
+  }
+
+  .searchbar { 
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  #savedLocsReturn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mainWthrLocCntr {
+    top: .5rem;
+  }
+
+  .wthrHrlCntr {
+    position: absolute;
+    top: 21rem;
+    /* height: 10rem; */
+    width: 100%;
+  }
+
+  .currentWeatherCntr .wthrHrlCntr {
+    top: 25rem;
+    width: 90%;
+  }
+ 
+  .locationsCntr { width: 125%; }
+
+  .openWeatherBtn {
+    top: -3.3rem;
+    font-size: 35px;
+    padding: 0px 7px;
+  }
+
+  .currentWeatherCntr {
+    top: 0px;
+    right: 0; 
+    pointer-events: auto;
+    width: 700px;
+    height: 100%; 
+    padding-bottom: 2rem;
+  }
+  
+  .wthrInfoCntr {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 5;
+  }
+
+  .animBG {
+    width: 700px;
+  }
+
+  .currentWeatherCntr .returnMainViewBtn {
+    z-index: 5;
+  }
 
 }

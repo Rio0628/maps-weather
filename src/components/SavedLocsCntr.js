@@ -5,7 +5,7 @@ import { MdArrowForwardIos, MdOutlineRemove } from 'react-icons/md';
 const SavedLocsCntr = () => {
     return (
         <div className='savedLocsCntr'>
-            <div className='returnMainViewBtn'>
+            <div className='returnMainViewBtn' id='savedLocsReturn'>
                 <p className='returnBtnTxt'>Main View</p>
     
                 <MdArrowForwardIos className='logo'/>
@@ -50,6 +50,8 @@ const SavedLocsCntr = () => {
                             </div>
                         </div> 
                     </div>
+
+                    
                 </div>
             </div>
         </div>

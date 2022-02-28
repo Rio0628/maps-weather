@@ -9,7 +9,7 @@ const CurrentWeather = () => {
             <CurrentWeatherBG />
 
             <div className='wthrInfoCntr'>
-                <div className='returnMainViewBtn'>
+                <div className='returnMainViewBtn'  onClick={ () => console.log('mario')}>
                     <MdArrowBackIos className='logo'/>
 
                     <p className='returnBtnTxt'>Main View</p>
@@ -24,7 +24,7 @@ const CurrentWeather = () => {
 
                     <p className='crrntWthrTxt'>Crrnt Weather</p>
                     
-                    <p className='saveWhtrLocBtn'>Save Location</p>
+                    <p className='saveWhtrLocBtn' onClick={ () => console.log('mario')}>Save Location</p>
                 </div>
             
                 <div className='wthrHrlCntr' id='wthrHrlCntr'>
