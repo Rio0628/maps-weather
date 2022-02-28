@@ -49,7 +49,43 @@ const CurrentWeather = () => {
 
                         <p className='highTemp'>00*C</p>
                     </div>
+                    
+                    <div className='indFrcst'>
+                        <p className='frcstDay'>Day</p>
 
+                        <div className='WthrIcon'><TiWeatherCloudy className='logo'/></div>
+
+                        <p className='lowTemp'>00*C</p>
+
+                        <p className='highTemp'>00*C</p>
+                    </div>
+                    <div className='indFrcst'>
+                        <p className='frcstDay'>Day</p>
+
+                        <div className='WthrIcon'><TiWeatherCloudy className='logo'/></div>
+
+                        <p className='lowTemp'>00*C</p>
+
+                        <p className='highTemp'>00*C</p>
+                    </div>
+                    <div className='indFrcst'>
+                        <p className='frcstDay'>Day</p>
+
+                        <div className='WthrIcon'><TiWeatherCloudy className='logo'/></div>
+
+                        <p className='lowTemp'>00*C</p>
+
+                        <p className='highTemp'>00*C</p>
+                    </div>
+                    <div className='indFrcst'>
+                        <p className='frcstDay'>Day</p>
+
+                        <div className='WthrIcon'><TiWeatherCloudy className='logo'/></div>
+
+                        <p className='lowTemp'>00*C</p>
+
+                        <p className='highTemp'>00*C</p>
+                    </div>
                     
                 </div>
             </div>
