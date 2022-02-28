@@ -37,8 +37,6 @@ class App extends Component {
           <div className='cntrOpenWeather'><div className='openWeatherBtn'><TiWeatherCloudy className='logo' /></div></div>
         </div>
 
-       
-      
         <CurrentWeather  />
 
 
