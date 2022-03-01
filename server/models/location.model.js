@@ -1,8 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Location = sequelize.define('location', {
         name: { type: Sequelize.STRING },
-        long: { type: Sequelize.DECIMAL(10, 2) },
-        lat: { type: Sequelize.DECIMAL(10, 2) },
+        long: { type: Sequelize.FLOAT(11) },
+        lat: { type: Sequelize.FLOAT(11) },
         setAsMain: { type: Sequelize.BOOLEAN }
     });
     return Location;

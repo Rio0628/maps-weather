@@ -2,11 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const db = require('./server/models');
-let corsOptions = { origin: 'http://localhost:8081' };
 
 db.sequelize.sync();
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

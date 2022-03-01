@@ -3,6 +3,8 @@ import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { Map, SavedLocsCntr, CurrentWeather } from './components';
 import CurrentWeatherBG from './components/CurrentWeatherBG';
+import API from './api';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -15,8 +17,12 @@ class App extends Component {
 
   render () {
 
+    console.log('mario domenech')
 
-    // mapboxgl.accessToken = 'pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ'
+    // API.getAllLocs().then(data => console.log(data.data))
+
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => console.log(data))
+
 
     return (
       <div className="container">
