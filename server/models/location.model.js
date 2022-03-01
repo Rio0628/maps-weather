@@ -1,9 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
     const Location = sequelize.define('location', {
         name: { type: Sequelize.STRING },
-        currentWeather: { type: Sequelize.JSON },
-        hourlyFrcst: { type: Sequelize.JSON },
-        ftrDailyFrcst: { type: Sequelize.JSON },
+        long: { type: Sequelize.DECIMAL(10, 2) },
+        lat: { type: Sequelize.DECIMAL(10, 2) },
+        setAsMain: { type: Sequelize.BOOLEAN }
     });
     return Location;
 }
+
+/* 
+    MODEL WILL BE
+
+    name
+    long
+    lat
+    isMain
+
+*/
