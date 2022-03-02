@@ -16,7 +16,8 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* overflow: hidden; */
+  overflow: hidden;
+  /* overflow-y: scroll; */
   font-family: 'Open Sans'; 
   /* background: red; */
   background: maroon;
@@ -99,7 +100,6 @@ code {
 }
 
 .map {
-  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -124,6 +124,7 @@ code {
   /* outline: 3px solid #161d1d; */
 }
 
+/* .savedLocsCntr { height: 200%; } */
 .savedLocsCntr::-webkit-scrollbar, .wthrInfoCntr::-webkit-scrollbar { width: 10px; }
 
 .savedLocsCntr::-webkit-scrollbar-thumb {
@@ -367,7 +368,7 @@ code {
 
 .wthrInfoCntr {
   position: relative;
-  height: 200%;
+  height: 100vh;
   width: 100%;
   z-index: 3; 
   display: flex;
@@ -376,6 +377,8 @@ code {
   background: rgba(22, 29, 29, .15);
   /* outline: 5px solid rgba(22, 29, 29, 1); */
   backdrop-filter: blur(10px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .wthrInfoCntr::-webkit-scrollbar-thumb {
@@ -383,15 +386,27 @@ code {
   border-radius: 20px;
 }
 
+.currentWeatherCntr .wthrHrlCntr {
+  position: absolute;
+  top: 29.8rem;
+  /* width: 90%; */
+}
+
 .currentWeatherCntr {
   /* display: block; */
   /* opacity: 0; */
   /* left: 200rem; */
+  /* height: 100%; */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* overflow-x: hidden; */
   transform: translateX(100rem);
+  
 }
 
 .currentWeatherCntr .returnMainViewBtn {
   /* height: 200%; */
+  /* position: fixed; */
   left: .8rem;
   right: 0px;
   padding: 0px 10px 2px 10px; 
@@ -409,13 +424,9 @@ code {
   cursor: pointer;
 }
 
-.currentWeatherCntr .wthrHrlCntr {
-  top: 8rem;
-}
-
 .ftrFrcstHeading {
   position: relative;
-  top: 8rem;
+  top: 15rem;
   font-size: 25px;
   font-family: 'Titillium Web';
   font-weight: 800;
@@ -426,7 +437,7 @@ code {
 
 .ftrFrcstCntr {
   position: relative;
-  top: 7.5rem;
+  top: 15rem;
   padding-bottom: 10rem;
   width: 100%;
   /* outline: 1px solid red; */
@@ -463,6 +474,8 @@ code {
   width: 100%;
   /* outline: 1px solid red; */
   /* z-index: 9; */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   overflow: hidden;
 }
 

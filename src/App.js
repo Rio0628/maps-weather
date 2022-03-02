@@ -56,10 +56,10 @@ console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
 
-        <SavedLocsCntr />
+        {/* <SavedLocsCntr /> */}
 
         <div className='map-headerCntr'>
-          {/* <Map /> */}
+          <Map />
 
           <div className='headerBtnsContainer'>
             <div className='openMenuBtn'><AiOutlineMenu className='logo'/></div>
