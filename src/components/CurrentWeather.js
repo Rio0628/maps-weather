@@ -80,7 +80,7 @@ const CurrentWeather = (props) => {
 
                     <p className='crrntWthrTxt'>{props.weather.current.weather[0].main}</p>
                     
-                    <p className='saveWhtrLocBtn' onClick={ () => console.log('mario')}>Save Location</p>
+                    <p className={ props.newLocSaved ? 'saveWthrLocBtn active' : 'saveWthrLocBtn'} onClick={props.saveLocation}>{props.newLocSaved ? 'Location Saved' : 'Save Location'}</p>
                 </div>
             
                 <div className='wthrHrlCntr' id='wthrHrlCntr'>

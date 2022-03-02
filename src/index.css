@@ -151,13 +151,13 @@ code {
   cursor: pointer;
 }
 
-.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWhtrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover  {
+.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover  {
   color:#161d1d;
   background: #fff;
   transition: .1s linear;
 }
 
-.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWhtrLocBtn:active, .searchBtn:active, .openWeatherBtn:active {
+.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active {
   outline: none;
   color:#fff;
   background: #161d1d;
@@ -412,7 +412,7 @@ code {
   padding: 0px 10px 2px 10px; 
 } 
 
-.saveWhtrLocBtn {
+.saveWthrLocBtn {
   position: relative;
   bottom: 4rem;
   font-size: 20px;
@@ -422,6 +422,12 @@ code {
   border-radius: 2px;
   padding: 5px 20px;
   cursor: pointer;
+}
+
+.saveWthrLocBtn.active {
+  background: #fff;
+  color: #161d1d;
+  pointer-events: none;
 }
 
 .ftrFrcstHeading {

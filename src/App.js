@@ -52,7 +52,22 @@ class App extends Component {
       this.setState({ weatherViewTrggrd: true });
       this.weatherCntrAnim.play();
     }
-console.log(this.state.crrtWeatherSrchd)
+
+    const saveLocationDB = () => {
+      const object = {
+        name: this.state.currentWeatherName,
+        long: this.state.crrtWeatherSrchd.lon,
+        lat: this.state.crrtWeatherSrchd.lat,
+        setAsMain: false
+      }
+
+      API.createLoc(object).then(res => alert('Location Added Succesfully!'));
+      this.setState({ locationSaved: true });
+      // console.log(object);
+      // console.log(this.state.crrtWeatherSrchd)
+    }
+
+// console.log(this.state.crrtWeatherSrchd);
     return (
       <div className="container">
 
@@ -73,7 +88,7 @@ console.log(this.state.crrtWeatherSrchd)
         </div>
 
         { this.state.weatherSearched ? 
-        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} /> : null }
+        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} newLocSaved={this.state.locationSaved} /> : null }
 
 
       </div>
