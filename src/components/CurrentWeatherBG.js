@@ -6,7 +6,7 @@ import { GiWaterDrop } from 'react-icons/gi';
 import { WiWindy } from 'react-icons/wi';
 import gsap from 'gsap';
 
-const CurrentWeatherBG = () => {
+const CurrentWeatherBG = (props) => {
 
     const sunMoonRef = useRef(null);
     const cloudref = useRef([]);
@@ -43,6 +43,8 @@ const CurrentWeatherBG = () => {
                     <div className='partlyCloud' ref={addPartlyClouds} key={'cloud' + ( i + 1)}><BsCloudFill /></div>
                 } }}
     */
+
+    if (props.wthrByIcon === '02n' || props.whtrByIcon === '03d') { console.log('maroi')}
 
     useEffect(() => {
         // console.log(mainRef.current.clientWidth)

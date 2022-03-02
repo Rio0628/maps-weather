@@ -36,12 +36,14 @@ const CurrentWeather = (props) => {
     }
 
     const getDay = (date) => {
+        let currentDay = currentTime.toString().split(' ');
         let day = new Date(date * 1000);
         day = day.toString().split(' ');
 
-        return day[0]
+        if (day[2] === currentDay[2]) return 'Today'
+        else return day[0]
     }
-
+    console.log(currentTime)
     const showWeather = wthr => 
         wthr === '01d' ? <icons.IoMdSunny className='logo' /> : 
         wthr === '01n' ? <icons.IoMdMoon className='logo' /> : 
@@ -60,7 +62,7 @@ const CurrentWeather = (props) => {
 
     return (
         <div className='currentWeatherCntr' ref={cntrRef}>
-            <CurrentWeatherBG />
+            <CurrentWeatherBG whtrByIcon={props.weather.current.weather[0].icon} whtrByName={props.weather.current.weather[0].main}/>
 
             <div className='wthrInfoCntr'>
                 <div className='returnMainViewBtn'  onClick={ () => props.weatherAnim.reverse()}>
@@ -83,7 +85,7 @@ const CurrentWeather = (props) => {
             
                 <div className='wthrHrlCntr' id='wthrHrlCntr'>
                     { hourly.map(hour => 
-                        <div className='indHrlFrcst'>
+                        <div className='indHrlFrcst' key={'Hour ' + new Date(hour.dt * 1000) }>
                             <div className='timeWthr'>{getTime(hour.dt)}</div>
   
                             <div className='indHrlIcon'>{showWeather(hour.weather[0].icon)}</div>
@@ -98,7 +100,7 @@ const CurrentWeather = (props) => {
 
                 <div className='ftrFrcstCntr'>
                     {props.weather.daily.map(day => 
-                        <div className='indFrcst'>
+                        <div className='indFrcst' key={'day ' + new Date(day.dt * 1000)}>
                             <p className='frcstDay'>{getDay(day.dt)}</p>
 
                             <div className='WthrIcon'>{showWeather(day.weather[0].icon)}</div>

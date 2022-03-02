@@ -461,6 +461,12 @@ code {
   /* outline: 1px solid red; */
 }
 
+.frcstDay {
+  width: 3rem;
+  text-align: left;
+  /* outline: 1px solid red; */
+}
+
 .WthrIcon {
   display: flex;
   font-size: 35px;
