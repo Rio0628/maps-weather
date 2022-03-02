@@ -233,14 +233,16 @@ code {
   overflow-y: hidden;
 }
 
-.wthrHrlCntr::-webkit-scrollbar {
+.wthrHrlCntr::-webkit-scrollbar, .currentWeatherCntr .wthrHrlCntr::-webkit-scrollbar {
   width: 2px; 
 }
 
-.wthrHrlCntr::-webkit-scrollbar-thumb {
+.wthrHrlCntr::-webkit-scrollbar-thumb, .currentWeatherCntr .wthrHrlCntr::-webkit-scrollbar-thumb {
   background: rgba(22, 29, 29, .05);
   border-radius: 20px;
 }
+
+.wthrHrlCntr::-webkit-scrollbar-thumb { background: #272e33; }
 
 .indHrlFrcst {
   position: relative;

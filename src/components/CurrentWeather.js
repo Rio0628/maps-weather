@@ -3,7 +3,6 @@ import { MdArrowBackIos } from 'react-icons/md';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import CurrentWeatherBG from './CurrentWeatherBG';
 import gsap from 'gsap';
-import icons from '../weatherIcons';
 
 const CurrentWeather = (props) => {
 
@@ -21,20 +20,6 @@ const CurrentWeather = (props) => {
     // console.log(test.getHours() - 12)
     const currentTime = new Date(props.weather.current.dt * 1000);
 
-    const getTime = (timeStamp) => {
-        let time = new Date(timeStamp * 1000);
-        time = time.getHours();
-
-        if (time === currentTime.getHours()) { return `Now`} 
-        else if (time > 12) { 
-            time = time - 12;
-            return `${time} PM`
-        }
-        else if (time === 12) { return `${time} PM`}
-        else if (time === 0) { return `12 AM`} 
-        else { return `${time} AM`}
-    }
-
     const getDay = (date) => {
         let currentDay = currentTime.toString().split(' ');
         let day = new Date(date * 1000);
@@ -44,19 +29,7 @@ const CurrentWeather = (props) => {
         else return day[0]
     }
     console.log(currentTime)
-    const showWeather = wthr => 
-        wthr === '01d' ? <icons.IoMdSunny className='logo' /> : 
-        wthr === '01n' ? <icons.IoMdMoon className='logo' /> : 
-        wthr === '02d' ? <icons.IoIosPartlySunny className='logo' /> : 
-        wthr === '02n' ? <icons.IoIosCloudyNight className='logo' /> : 
-        wthr === '03d' || wthr === '04d' || wthr === '03n' || wthr === '04n' ? <icons.BsCloudyFill className='logo' /> :
-        wthr === '09d' || wthr === '09n' ? <icons.BsCloudDrizzleFill className='logo' /> :
-        wthr === '10d' || wthr === '10n' ? <icons.IoIosRainy className='logo' /> : 
-        wthr === '11d' || wthr === '11n' ? <icons.IoIosThunderstorm className='logo' /> : 
-        wthr === '13d' || wthr === '13n' ? <icons.BsCloudSnowFill className='logo' /> : 
-        wthr === '50d' || wthr === '50n' ? <icons.WiWindy className='logo' /> :
-        null ;
-        
+     
     const hourly = props.weather.hourly.slice(0, 24);
     
 
@@ -74,7 +47,7 @@ const CurrentWeather = (props) => {
                 <div className='mainWthrLocCntr'>
                     <p className='wthrLocName'>{props.locationName}</p>
 
-                    <div className='locCrrntWthr'>{showWeather(props.weather.current.weather[0].icon)}</div>
+                    <div className='locCrrntWthr'>{props.showWeather(props.weather.current.weather[0].icon)}</div>
 
                     <p className='crrntWthr'>{props.weather.current.temp.toFixed()}°C</p>
 
@@ -86,9 +59,9 @@ const CurrentWeather = (props) => {
                 <div className='wthrHrlCntr' id='wthrHrlCntr'>
                     { hourly.map(hour => 
                         <div className='indHrlFrcst' key={'Hour ' + new Date(hour.dt * 1000) }>
-                            <div className='timeWthr'>{getTime(hour.dt)}</div>
+                            <div className='timeWthr'>{props.getTime(hour.dt, currentTime)}</div>
   
-                            <div className='indHrlIcon'>{showWeather(hour.weather[0].icon)}</div>
+                            <div className='indHrlIcon'>{props.showWeather(hour.weather[0].icon)}</div>
   
                             <p className='frcstTemp'>{hour.temp.toFixed()}°C</p>
                         </div>
@@ -103,7 +76,7 @@ const CurrentWeather = (props) => {
                         <div className='indFrcst' key={'day ' + new Date(day.dt * 1000)}>
                             <p className='frcstDay'>{getDay(day.dt)}</p>
 
-                            <div className='WthrIcon'>{showWeather(day.weather[0].icon)}</div>
+                            <div className='WthrIcon'>{props.showWeather(day.weather[0].icon)}</div>
 
                             <p className='lowTemp'>{day.temp.min.toFixed()}°C</p>
 
