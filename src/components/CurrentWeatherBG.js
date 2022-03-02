@@ -52,152 +52,136 @@ const CurrentWeatherBG = (props) => {
         // console.log(sunMoonRef.current)    
 
         // Sunny background
-        gsap.to(sunMoonRef.current, { rotation: '45', yoyo: true, ease: 'none', duration: 11, repeat: -1});
+        if (props.whtrByIcon === '01d' || props.whtrByIcon === '01n') {
+            gsap.to(sunMoonRef.current, { rotation: '45', yoyo: true, ease: 'none', duration: 11, repeat: -1});
+        }
+        
 
         // Partly Cloudy Animations
-        // cloudref.current.forEach( (el) => {
-        //     gsap.to(el, { x: '+=100', ease: 'none', yoyo: true, repeat: -1, duration: 11 })
-        // });
+        if (props.wthrByIcon === '02d' || props.wthrByIcon === '02n' || props.wthrByIcon === '09d' || props.whtrByIcon === '09n') {
+            cloudref.current.forEach( (el) => {
+                gsap.to(el, { x: '+=100', ease: 'none', yoyo: true, repeat: -1, duration: 11 })
+            });
+        }
 
         // Coudy Animations
+        if (props.wthrByIcon === '03d' || props.wthrByIcon === '04d' || props.wthrByIcon === '03n' || props.wthrByIcon === '04n' || props.wthrByIcon === '10d' || props.wthrByIcon === '10n' || props.wthrByIcon === '11d' || props.wthrByIcon === '11n') {}
         cloudref.current.forEach( (el) => {
             gsap.to(el, { x: '+=50', ease: 'none', repeat: -1, yoyo: true, duration: 8 });
         });
 
         // Drizzle Animations
-        // dropsRef.current.forEach( (el) => {
-        //     gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 11) + 2 })
-        // });
+        if (props.wthrByIcon === '09d' || props.whtrByIcon === '09n') {
+            dropsRef.current.forEach( (el) => {
+                gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 11) + 2 })
+            });
+        }
 
         // Rain Animations
-        dropsRef.current.forEach( (el) => {
-            gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 6) + 2 })
-        });
+        if (props.wthrByIcon === '10d' || props.wthrByIcon === '10n' || props.wthrByIcon === '11d' || props.wthrByIcon === '11n') {
+            dropsRef.current.forEach( (el) => {
+                gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 6) + 2 })
+            });
+        }
 
         // Mist Animations
-        mistRef.current.forEach( (el) => {
-            gsap.to(el, { x: -30, ease: 'none', yoyo: true, repeat: -1, duration: 5});
-        });
-
+        if (props.whtrByIcon === '50d' || props.whtrByIcon === '50n') {
+            mistRef.current.forEach( (el) => {
+                gsap.to(el, { x: -30, ease: 'none', yoyo: true, repeat: -1, duration: 5});
+            });    
+        }
     }, [setCntrWidth]);
 
     return (
         <div className='animBG' ref={mainRef}>
                 
-            {/* <div className='BG sunny'>
-                <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
-            </div> */}
+            { props.wthrByIcon === '01d' ? 
+                <div className='BG sunny'>
+                    <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
+                </div> 
+            :  null }
 
                 
-            {/* <div className='BG night'>
-                <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
-            </div> */}
+            { props.wthrByIcon === '01n' ? 
+                <div className='BG night'>
+                    <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
+                </div>
+            : null }
 
-            {/* <div className='BG partlyCloudy'>
-                <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
 
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-            </div> */}
+            { props.wthrByIcon === '02d' ? 
+                <div className='BG partlyCloudy'>
+                    <div className='sun' ref={sunMoonRef}><RiSunFill /></div>
 
-            {/* <div className='BG partlyCloudy night'>
-                <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                </div>
+            : null }
 
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-            </div> */}
-{/* 
-            <div className='BG cloudy'>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-            </div>  */}
+            { props.wthrByIcon === '02n' ? 
+                <div className='BG partlyCloudy night'>
+                    <div className='moon' ref={sunMoonRef}><BsFillMoonFill /></div>
 
-            {/* <div className='BG drizzle'>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                </div>
+            : null }
 
-                <div className='dropsCntr'>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+            { props.wthrByIcon === '03d' || props.wthrByIcon === '03n' || props.wthrByIcon === '04d' || props.wthrByIcon === '04n' ? 
+                <div className='BG cloudy'>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                 </div> 
-            </div>  */}
+            : null }
 
-            {/* <div className='BG rain'>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-                <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
-            
-                <div className='dropsCntr'>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                </div>
-            </div> */}
+            { props.wthrByIcon === '09d' || props.whtrByIcon === '09n' ?
+                <div className='BG drizzle'>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
 
-            {/* <div className='BG thunderstorm'>
+                    <div className='dropsCntr'>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                    </div> 
+                </div> 
+            : null}
            
-                <div className='cloudsCntr'>
+            { props.wthrByIcon === '10d' || props.wthrByIcon === '10n' ?
+                <div className='BG rain'>
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
@@ -210,69 +194,113 @@ const CurrentWeatherBG = (props) => {
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
                     <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+         
+                    <div className='dropsCntr'>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                    </div>
                 </div>
+            : null }
+           
+            { props.wthrByIcon === '11d' || props.wthrByIcon === '11n' ?
+                <div className='BG thunderstorm'>
+                    <div className='cloudsCntr'>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                        <div className='cloud' ref={addPartlyClouds}><BsCloudFill /></div>
+                    </div>
                         
-                <div className='dropsCntr'>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
-                    <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                    <div className='dropsCntr'>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
+                        <div className='drop' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><GiWaterDrop /></div>
 
-                    <div className='lightning flashit'></div>
+                        <div className='lightning flashit'></div>
+                    </div>
                 </div>
-            </div> */}
-        
-            {/* <div className='BG snow'>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-                <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
-            </div> */}
-
-            <div className='BG rain'>
-                        
-                <div className='mist' ref={addMistRef} ><WiWindy /></div>
-                <div className='mist' ref={addMistRef} ><WiWindy /></div>
-                <div className='mist' ref={addMistRef} ><WiWindy /></div>
-                <div className='mist' ref={addMistRef} ><WiWindy /></div>
-                <div className='mist' ref={addMistRef} ><WiWindy /></div>
-            </div>
-        
+            : null }
             
+            { props.wthrByIcon === '13d' || props.wthrByIcon === '13n' ? 
+                <div className='BG snow'>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                    <div className='flake' ref={addDropsRef} style={{ left: Math.floor(Math.random() * (cntrWidth / 16)) + 'rem' }} ><FaSnowflake /></div>
+                </div>
+            : null }
+
+            { props.wthrByIcon === '50d' || props.whtrByIcon === '50n' ?
+                <div className='BG rain'>
+                    <div className='mist' ref={addMistRef} ><WiWindy /></div>
+                    <div className='mist' ref={addMistRef} ><WiWindy /></div>
+                    <div className='mist' ref={addMistRef} ><WiWindy /></div>
+                    <div className='mist' ref={addMistRef} ><WiWindy /></div>
+                    <div className='mist' ref={addMistRef} ><WiWindy /></div>
+                </div>
+            : null }
         </div>
     );
 }

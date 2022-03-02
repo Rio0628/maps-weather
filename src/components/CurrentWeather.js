@@ -62,7 +62,7 @@ const CurrentWeather = (props) => {
 
     return (
         <div className='currentWeatherCntr' ref={cntrRef}>
-            <CurrentWeatherBG whtrByIcon={props.weather.current.weather[0].icon} whtrByName={props.weather.current.weather[0].main}/>
+            <CurrentWeatherBG wthrByIcon={props.weather.current.weather[0].icon} whtrByName={props.weather.current.weather[0].main}/>
 
             <div className='wthrInfoCntr'>
                 <div className='returnMainViewBtn'  onClick={ () => props.weatherAnim.reverse()}>
