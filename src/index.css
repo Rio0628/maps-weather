@@ -198,7 +198,7 @@ code {
   /* outline: 1px solid magenta; */
 }
 
-.wthrLocName, .crrntWthr {
+.wthrLocName, .crrntWthr, .noMainLoc {
   font-family: 'Titillium Web';
   font-weight: 800;
   width: 90%;
@@ -207,6 +207,11 @@ code {
   font-size: 35px;
   transition: .5s linear;
   /* outline: 1px solid green; */
+}
+
+.noMainLoc {
+  position: relative;
+  top: 5rem;
 }
 
 .locCrrntWthr {
@@ -518,17 +523,11 @@ code {
 }
 
 .BG.sunny { background: linear-gradient( #5bbce4, #45b3e0); }
-
 .BG.night, .BG.partlyCloudy.night { background: linear-gradient( #0c1445, #38285c); }
-
 .BG.partlyCloudy { background: linear-gradient( #5bbce4, #45b3e0);}
-
 .BG.cloudy, .BG.rain{ background: linear-gradient( #dbdcdc, #97a5aa);}
-
 .BG.snow { background: linear-gradient( #dbdcdc, #97a5aa);}
-
 .BG.drizzle { background: linear-gradient( #dbdcdc, #5bbce4);}
-
 .BG.thunderstorm { background: linear-gradient( #97a5aa, #273440); }
 
 .sun, .moon {

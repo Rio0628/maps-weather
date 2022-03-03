@@ -63,7 +63,7 @@ const SavedLocsCntr = (props) => {
 
                     <p className='removeMainBtn' loc={props.mainLocation.id} onClick={deleteLoc}>Remove Main Location</p>
                 </div>
-            : <div className='mainWthrLocCntr'></div>}
+            : <div className='mainWthrLocCntr'><p className='noMainLoc'>No main location saved</p></div>}
 
             { props.mainWthrPrsnt ?
             
@@ -78,14 +78,13 @@ const SavedLocsCntr = (props) => {
                         </div>  
                     )}            
                 </div>
-            : null}
+            : <div className='wthrHrlCntr'></div>}
             
 
             <div className='othrSavedLocsCntr'>
                 <p className='savedLocsTitle'>Other Saved Locations</p>
                 
                 <div className='locationsCntr'>
-                
                     { props.allOtherLocs.map(location => 
                         <div className='indSavedLoc' key={`location ${location.long} ${location.lat}`}>
                             <p className='locName'>{location.name}</p>
