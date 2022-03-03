@@ -1,14 +1,11 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
 import APIS from '../api';
-import { TiWeatherCloudy } from 'react-icons/ti';
 import { MdArrowForwardIos, MdOutlineRemove } from 'react-icons/md';
 
 const SavedLocsCntr = (props) => {
 
-  
     //  Function to get weather of main location
-    let mainWthrPrsnt = props.mainWthrPrsnt;
+    let mainWthrPrsnt = props.mainWthrPrsnt, cntrRef = useRef(null);
 
     const setLocAsMain = async (e) => {
         // Set current main location to a normal location
@@ -43,9 +40,14 @@ const SavedLocsCntr = (props) => {
         currentTime = new Date(props.mainLocationWeather.current.dt * 1000)
     }
 
+    useEffect(() => {
+        console.log(cntrRef)
+        props.savedLocsAnim.to(cntrRef.current, { opacity: 1, left: 0, duration: .5, ease: 'none' })
+    }, []);
+
     return (
-        <div className='savedLocsCntr'>
-            <div className='returnMainViewBtn' id='savedLocsReturn'>
+        <div className='savedLocsCntr' ref={cntrRef}>
+            <div className='returnMainViewBtn' id='savedLocsReturn' onClick={() => props.savedLocsAnim.reverse()}>
                 <p className='returnBtnTxt'>Main View</p>
     
                 <MdArrowForwardIos className='logo'/>

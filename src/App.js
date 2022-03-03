@@ -23,6 +23,7 @@ class App extends Component {
     }
     this.getLocs = this.getLocs.bind(this);
     this.weatherCntrAnim = gsap.timeline({ paused: true });
+    this.savedLocsAnim = gsap.timeline({ paused: true });
   }
   
   async getLocs () {
@@ -80,7 +81,7 @@ class App extends Component {
       // console.log(lon, lat);
       checkIfLocSaved();
       this.setState({ weatherSearched: true });
-      this.setState({ weatherViewTrggrd: true });
+      // this.setState({ weatherViewTrggrd: true });
       this.weatherCntrAnim.play();
     }
 
@@ -136,13 +137,13 @@ class App extends Component {
     return (
       <div className="container">
 
-        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
+        <SavedLocsCntr savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
           <Map />
 
           <div className='headerBtnsContainer'>
-            <div className='openMenuBtn'><AiOutlineMenu className='logo'/></div>
+            <div className='openMenuBtn' onClick={() => this.savedLocsAnim.play()}><AiOutlineMenu className='logo'/></div>
             <div className='searchbarCntr'>
               <input className='searchbar' type='text' placeholder='Search Location' onChange={ (e) => this.setState({ inputSearchbar: e.target.value }) }/>
               <div className='searchBtn' onClick={searchWeather}><AiOutlineSearch className='logo'/></div>
@@ -152,8 +153,7 @@ class App extends Component {
           <div className='cntrOpenWeather'><div className='openWeatherBtn' onClick={() =>  this.weatherCntrAnim.play() }><TiWeatherCloudy className='logo' /></div></div>
         </div>
 
-        { this.state.weatherSearched ? 
-        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved} /> : null }
+        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved} />
 
 
       </div>

@@ -27,7 +27,7 @@ const Map = () => {
 
     return (
         <div className='mapContainer'>
-            <div className='map' ref={mapRef}></div>
+            <div className='map' ref={mapRef} onClick={(e) => console.log(e.target)}></div>
         </div>
     );
 }
