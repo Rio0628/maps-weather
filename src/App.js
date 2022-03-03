@@ -18,28 +18,47 @@ class App extends Component {
       mainLocation: [],
       allOtherLocs: [],
       inputSearchbar: '',
-      weatherSearched: false 
+      weatherSearched: false,
+      locationSaved: false 
     }
+    this.getLocs = this.getLocs.bind(this);
     this.weatherCntrAnim = gsap.timeline({ paused: true });
   }
-
-  async componentDidMount () {
-    await API.getAllLocs().then(data => this.setState({ allSavedLocs: data.data}) )
   
+  async getLocs () {
+    let allSavedLocs;
+    await API.getAllLocs().then(data => allSavedLocs = data.data )
+    this.setState({ allSavedLocs: allSavedLocs });
+
     const mainLocation = this.state.allSavedLocs.filter(location => location.setAsMain === true);
     this.setState({ mainLocation: mainLocation[0] });
     
+    await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+    `).then(data => this.setState({ mainLocationWeather: data.data }) );
+
     const allOtherLocs = this.state.allSavedLocs.filter(location => location.setAsMain === false )
     this.setState({ allOtherLocs: allOtherLocs });
 
-    await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.mainLocation.lat}&lon=${this.state.mainLocation.long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
-    `).then(data => this.setState({ mainLocationWeather: data.data }) );
+    
+  }
+
+  async componentDidMount () {
+    await this.getLocs();
   }
   
   render () {
-    // console.log(this.state.mainLocation)
-    // console.log(this.state.allOtherLocs)
-    console.log(this.state.mainLocationWeather)
+
+    const checkIfLocSaved = () => {
+
+      const lon = this.state.crrtWeatherSrchd.lon, lat = this.state.crrtWeatherSrchd.lat;
+
+      for (let i = 0; i < this.state.allSavedLocs.length; i++) {
+        if (this.state.allSavedLocs[i].long === lon && this.state.allSavedLocs[i].lat === lat) {
+          this.setState({ locationSaved: true });
+        }
+      }
+    }
+    // console.log(this.state.mainLocationWeather)
     const searchWeather = async () => {
       let lon, lat;
       // let weatherCntrAnim = gsap.timeline({ paused: true });
@@ -48,7 +67,6 @@ class App extends Component {
       await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=orlando&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
         lon = data.data.coord.lon;
         lat = data.data.coord.lat;
-        // console.log(data.data)
         this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
       })
     
@@ -56,7 +74,7 @@ class App extends Component {
       `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
 
       // console.log(lon, lat);
-
+      checkIfLocSaved();
       this.setState({ weatherSearched: true });
       this.setState({ weatherViewTrggrd: true });
       this.weatherCntrAnim.play();
@@ -101,10 +119,11 @@ class App extends Component {
       else { return `${time} AM`}
     }
 
+    // console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
 
-        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} />
+        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} />
 
         <div className='map-headerCntr'>
           <Map />
