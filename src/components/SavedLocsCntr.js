@@ -8,12 +8,12 @@ const SavedLocsCntr = (props) => {
 
   
     //  Function to get weather of main location
-
+    let mainWthrPrsnt = props.mainWthrPrsnt;
 
     const setLocAsMain = async (e) => {
         // Set current main location to a normal location
         let mainLocation;
-        if (props.mainWthrPrsnt) {
+        if (mainWthrPrsnt) {
             mainLocation = props.mainLocation;
             console.log(mainLocation)
             mainLocation.setAsMain = false;
@@ -23,7 +23,7 @@ const SavedLocsCntr = (props) => {
         const newMainLocation = await props.allOtherLocs.filter(location => location.id.toString() === e.target.getAttribute('loc'));
         newMainLocation[0].setAsMain = true;
 
-        if (props.mainWthrPrsnt) { await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!')) } 
+        if (mainWthrPrsnt) { await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!')) } 
         await APIS.updateLoc(newMainLocation[0].id, newMainLocation[0]).then(res => console.log('Location updated successfully!'));
         // props.getMainWeather(mainLocation);
         props.getLocs();
@@ -38,7 +38,7 @@ const SavedLocsCntr = (props) => {
 
     let hourly, currentTime;
 
-    if (props.mainWthrPrsnt)  {
+    if (mainWthrPrsnt)  {
         hourly = props.mainLocationWeather.hourly.slice(0, 24);
         currentTime = new Date(props.mainLocationWeather.current.dt * 1000)
     }
@@ -51,7 +51,7 @@ const SavedLocsCntr = (props) => {
                 <MdArrowForwardIos className='logo'/>
             </div>
 
-            {props.mainWthrPrsnt ?
+            { props.mainWthrPrsnt === true ?
                 <div className='mainWthrLocCntr'>
                     <p className='wthrLocName'>{props.mainLocation.name}</p>
 
@@ -61,12 +61,11 @@ const SavedLocsCntr = (props) => {
 
                     <p className='crrntWthrTxt'>{props.mainLocationWeather.current.weather[0].main}</p>
 
-                    <p className='removeMainBtn' loc={props.mainLocation.id} onClick={deleteLoc}>Remove Main Location</p>
+                    <p className='removeMainBtn' loc={props.mainLocation.id} onClick={props.deleteMainLoc}>Remove Main Location</p>
                 </div>
             : <div className='mainWthrLocCntr'><p className='noMainLoc'>No main location saved</p></div>}
 
-            { props.mainWthrPrsnt ?
-            
+            { props.mainWthrPrsnt === true ?
                 <div className='wthrHrlCntr'>
                     { hourly.map(hour => 
                         <div className='indHrlFrcst' key={'Hour ' + new Date(hour.dt * 1000) }>

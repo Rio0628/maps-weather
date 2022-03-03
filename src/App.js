@@ -4,7 +4,7 @@ import { TiWeatherCloudy } from 'react-icons/ti';
 import { Map, SavedLocsCntr, CurrentWeather } from './components';
 import CurrentWeatherBG from './components/CurrentWeatherBG';
 import icons from './weatherIcons';
-import API from './api';
+import APIS from './api';
 import axios from 'axios';
 import gsap from 'gsap';
 
@@ -27,7 +27,7 @@ class App extends Component {
   
   async getLocs () {
     let allSavedLocs;
-    await API.getAllLocs().then(data => allSavedLocs = data.data )
+    await APIS.getAllLocs().then(data => allSavedLocs = data.data )
     this.setState({ allSavedLocs: allSavedLocs });    console.log(this.state.allSavedLocs)
 
     const mainLocation = this.state.allSavedLocs.filter(location => location.setAsMain === true);
@@ -92,7 +92,7 @@ class App extends Component {
         setAsMain: false
       }
 
-      API.createLoc(object).then(res => alert('Location Added Succesfully!'));
+      APIS.createLoc(object).then(res => alert('Location Added Succesfully!'));
       this.setState({ locationSaved: true });
     }
 
@@ -123,11 +123,20 @@ class App extends Component {
       else { return `${time} AM`}
     }
 
+    const deleteMainLoc = async (e) => {
+      // Delete a location with the loc attribute (id of location)
+      console.log(e.target.getAttribute('loc'));
+      this.setState({ mainWthrPrsnt: false });
+      await APIS.deleteLoc(e.target.getAttribute('loc')).then(res => alert('Location deleted successfully!'));
+      this.getLocs();
+      // console.log(mainWthrPrsnt)
+  }
+
     // console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
 
-        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} mainWthrPrsnt={this.state.mainWthrPrsnt} />
+        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
           <Map />
