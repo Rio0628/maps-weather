@@ -10,11 +10,10 @@ const CurrentWeather = (props) => {
     let cntrAnim = gsap.timeline({ paused: true });
 
     useEffect(() => {
-        console.log(cntrRef)
         props.weatherAnim.to(cntrRef.current, { opacity: 1, x: 0, duration: .5, ease: 'none' })
     }, []);
 
-    console.log(props.weather)
+    // console.log(props.weather)
     // const test = new Date(props.weather.current.dt * 1000);
     // console.log(test)
     // console.log(test.getHours() - 12)
@@ -32,7 +31,7 @@ const CurrentWeather = (props) => {
         if (day[2] === currentDay[2]) return 'Today'
         else return day[0]
     }
-    console.log(currentTime)
+    // console.log(currentTime)
     
 
     return (

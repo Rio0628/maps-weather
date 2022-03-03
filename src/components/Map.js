@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const Map = () => {
+const Map = (props) => {
 
     const mapRef = useRef(null);
 
@@ -17,8 +17,20 @@ const Map = () => {
             zoom: 10
         });
 
-        // Navigation controls
-        // map.addControl( new mapboxgl.NavigationControl(), 'bottom-right');
+        map.doubleClickZoom.disable();
+        map.on('style.load', function() {
+            map.on('dblclick', function(e) {
+                let coordinates = e.lngLat;
+                new mapboxgl.Popup()
+                  .setLngLat(coordinates)
+                  .setHTML('you clicked here: <br/>' + coordinates)
+                  .addTo(map);
+            
+                //   console.log(coordinates)
+                  props.showWthrFromMap(coordinates.lng, coordinates.lat);
+                })
+        });
+        // onClick={props.createMapMarker}
     
         // Clean up on unmount
         return () => map.remove();
@@ -27,7 +39,7 @@ const Map = () => {
 
     return (
         <div className='mapContainer'>
-            <div className='map' ref={mapRef} onClick={(e) => console.log(e.target)}></div>
+            <div className='map' ref={mapRef} ></div>
         </div>
     );
 }

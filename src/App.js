@@ -72,6 +72,7 @@ class App extends Component {
       await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
         lon = data.data.coord.lon;
         lat = data.data.coord.lat;
+        // console.log(data.data)
         this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
       })
     
@@ -95,6 +96,7 @@ class App extends Component {
 
       APIS.createLoc(object).then(res => alert('Location Added Succesfully!'));
       this.setState({ locationSaved: true });
+      this.getLocs();
     }
 
     const showWeather = wthr => 
@@ -131,8 +133,34 @@ class App extends Component {
       await APIS.deleteLoc(e.target.getAttribute('loc')).then(res => alert('Location deleted successfully!'));
       this.getLocs();
       // console.log(mainWthrPrsnt)
-  }
+    }
 
+    const showWthrFromMap = async (lon, lat) => {
+      let name;
+      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+      `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
+      
+      await axios.get(`http://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/${lon},${lat}.json?access_token=pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ`).then( data => name = data.data.features)
+
+      console.log(name)
+      for (let i = 0; i < name.length; i++) {
+        // console.log(name[i].id.split('.')[0])
+        if (name[i].id.split('.')[0] === 'city') {
+          name = name[i];
+        }
+      }
+      name = name.text;
+
+      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+        this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
+      })
+      
+      this.setState({ weatherSearched: true });
+      this.weatherCntrAnim.play();
+    }
+
+   
+    
     // console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
@@ -140,7 +168,7 @@ class App extends Component {
         <SavedLocsCntr savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
-          <Map />
+          <Map  showWthrFromMap={showWthrFromMap}/>
 
           <div className='headerBtnsContainer'>
             <div className='openMenuBtn' onClick={() => this.savedLocsAnim.play()}><AiOutlineMenu className='logo'/></div>
@@ -153,7 +181,7 @@ class App extends Component {
           <div className='cntrOpenWeather'><div className='openWeatherBtn' onClick={() =>  this.weatherCntrAnim.play() }><TiWeatherCloudy className='logo' /></div></div>
         </div>
 
-        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved} />
+        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved}/>
 
 
       </div>
