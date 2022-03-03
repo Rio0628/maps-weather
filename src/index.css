@@ -137,7 +137,7 @@ code {
   border-radius: 20px;
 }
 
-.returnMainViewBtn, .removeMainBtn {
+.returnMainViewBtn {
   position: absolute;
   right: .8rem;
   top: 1rem;
@@ -156,13 +156,24 @@ code {
   cursor: pointer;
 }
 
-.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover  {
+.removeMainBtn {
+  position: relative;
+  bottom: 4rem;
+  outline: 2px solid #fff;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 5px 20px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover, .removeMainBtn:hover  {
   color:#161d1d;
   background: #fff;
   transition: .1s linear;
 }
 
-.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active {
+.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active, .removeMainBtn:active {
   outline: none;
   color:#fff;
   background: #161d1d;
@@ -230,7 +241,7 @@ code {
 
 .wthrHrlCntr {
   position: absolute;
-  top: 20.5rem;
+  top: 30rem;
   width: 100%;
   height: 7.5rem;
   display: flex;
@@ -284,7 +295,7 @@ code {
 
 .othrSavedLocsCntr {
   position: relative;
-  top: 7rem;
+  top: 17rem;
   min-height: 20rem;
   width: 100%;
   padding-bottom: 10rem;
@@ -369,6 +380,8 @@ code {
   cursor: pointer;
   outline: 1px solid #fff;
 }
+
+.removeLocBtn p { pointer-events: none; } 
 
 .removeLocBtn .logo { font-size: 25px; }
 
@@ -869,10 +882,13 @@ code {
     top: .5rem;
   }
 
-  .wthrHrlCntr { width: 100%; }
+  .wthrHrlCntr { 
+    top: 28rem;
+    width: 100%; 
+  }
 
   .currentWeatherCntr .wthrHrlCntr {
-    top: 24.5rem;
+    top: 27.5rem;
     width: 90%;
   }
  

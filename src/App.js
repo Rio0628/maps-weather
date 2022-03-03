@@ -28,16 +28,20 @@ class App extends Component {
   async getLocs () {
     let allSavedLocs;
     await API.getAllLocs().then(data => allSavedLocs = data.data )
-    this.setState({ allSavedLocs: allSavedLocs });
+    this.setState({ allSavedLocs: allSavedLocs });    console.log(this.state.allSavedLocs)
 
     const mainLocation = this.state.allSavedLocs.filter(location => location.setAsMain === true);
     this.setState({ mainLocation: mainLocation[0] });
     
-    await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
-    `).then(data => this.setState({ mainLocationWeather: data.data }) );
-
+    if (mainLocation[0]) {
+      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+      `).then(data => { this.setState({ mainLocationWeather: data.data }); this.setState({ mainWthrPrsnt: true }); } );  
+    } else { this.setState({ mainLocationWeather: {} }); this.setState({ mainWthrPrsnt: false }); }
+    // console.log(this.state.mainLocationWeather.length)
+    
     const allOtherLocs = this.state.allSavedLocs.filter(location => location.setAsMain === false )
     this.setState({ allOtherLocs: allOtherLocs });
+    console.log(allOtherLocs)
 
     
   }
@@ -64,7 +68,7 @@ class App extends Component {
       // let weatherCntrAnim = gsap.timeline({ paused: true });
   
       // Initial Axios call to retrieve lon and lat 
-      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=orlando&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
         lon = data.data.coord.lon;
         lat = data.data.coord.lat;
         this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
@@ -123,7 +127,7 @@ class App extends Component {
     return (
       <div className="container">
 
-        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} />
+        <SavedLocsCntr mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
           <Map />

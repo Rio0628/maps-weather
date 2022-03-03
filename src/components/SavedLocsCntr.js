@@ -12,26 +12,33 @@ const SavedLocsCntr = (props) => {
 
     const setLocAsMain = async (e) => {
         // Set current main location to a normal location
-        const mainLocation = props.mainLocation;
-        console.log(mainLocation)
-        mainLocation.setAsMain = false;
+        let mainLocation;
+        if (props.mainWthrPrsnt) {
+            mainLocation = props.mainLocation;
+            console.log(mainLocation)
+            mainLocation.setAsMain = false;
+        }
         
         // Set the new location to the main one
         const newMainLocation = await props.allOtherLocs.filter(location => location.id.toString() === e.target.getAttribute('loc'));
         newMainLocation[0].setAsMain = true;
 
-        try {
-            await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!'))
-            await APIS.updateLoc(newMainLocation[0].id, newMainLocation[0]).then(res => console.log('Location updated successfully!'));
-            // props.getMainWeather(mainLocation);
-            props.getLocs();
-       
-        } catch { alert('Not able to update locations right now')}
+        if (props.mainWthrPrsnt) { await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!')) } 
+        await APIS.updateLoc(newMainLocation[0].id, newMainLocation[0]).then(res => console.log('Location updated successfully!'));
+        // props.getMainWeather(mainLocation);
+        props.getLocs();
+    }
+
+    const deleteLoc = async (e) => {
+        // Delete a location with the loc attribute (id of location)
+        console.log(e.target.getAttribute('loc'));
+        await APIS.deleteLoc(e.target.getAttribute('loc')).then(res => alert('Location deleted successfully!'));
+        props.getLocs();
     }
 
     let hourly, currentTime;
 
-    if (props.mainLocationWeather)  {
+    if (props.mainWthrPrsnt)  {
         hourly = props.mainLocationWeather.hourly.slice(0, 24);
         currentTime = new Date(props.mainLocationWeather.current.dt * 1000)
     }
@@ -44,7 +51,7 @@ const SavedLocsCntr = (props) => {
                 <MdArrowForwardIos className='logo'/>
             </div>
 
-            {props.mainLocationWeather ?
+            {props.mainWthrPrsnt ?
                 <div className='mainWthrLocCntr'>
                     <p className='wthrLocName'>{props.mainLocation.name}</p>
 
@@ -54,11 +61,11 @@ const SavedLocsCntr = (props) => {
 
                     <p className='crrntWthrTxt'>{props.mainLocationWeather.current.weather[0].main}</p>
 
-                    <p className='removeMainBtn'>Remove Main Location</p>
+                    <p className='removeMainBtn' loc={props.mainLocation.id} onClick={deleteLoc}>Remove Main Location</p>
                 </div>
-            : null}
+            : <div className='mainWthrLocCntr'></div>}
 
-            { props.mainLocationWeather ?
+            { props.mainWthrPrsnt ?
             
                 <div className='wthrHrlCntr'>
                     { hourly.map(hour => 
@@ -87,7 +94,7 @@ const SavedLocsCntr = (props) => {
 
                                 <p className='setLocMain' loc={location.id} onClick={setLocAsMain}>Set main</p>
     
-                                <div className='removeLocBtn' loc={location.id}>
+                                <div className='removeLocBtn' loc={location.id} onClick={deleteLoc}>
                                     <p>Remove</p>
                                     <MdOutlineRemove className='logo'/>
                                 </div>
