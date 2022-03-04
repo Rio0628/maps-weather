@@ -56,20 +56,20 @@ class App extends Component {
   render () {
 
     const checkIfLocSaved = () => {
-
-      const lon = this.state.crrtWeatherSrchd.lon, lat = this.state.crrtWeatherSrchd.lat;
-
+      
       for (let i = 0; i < this.state.allSavedLocs.length; i++) {
-        if (this.state.allSavedLocs[i].long === lon && this.state.allSavedLocs[i].lat === lat) {
+        if (this.state.allSavedLocs[i].name === this.state.currentWeatherName) {
           this.setState({ locationSaved: true });
         }
       }
     }
-    // console.log(this.state.mainLocationWeather)
+    console.log(this.state.currentWeatherName)
     const searchWeather = async () => {
       let lon, lat;
       // let weatherCntrAnim = gsap.timeline({ paused: true });
   
+      this.setState({ locationSaved: false });
+
       // Initial Axios call to retrieve lon and lat 
       await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
         lon = data.data.coord.lon;
@@ -143,6 +143,8 @@ class App extends Component {
     const showWthrFromMap = async (lon, lat) => {
       let name;
       
+      this.setState({ locationSaved: false });
+
       try {
         await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
         `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
@@ -164,6 +166,7 @@ class App extends Component {
       
       } catch { alert('Unable to get weather with current coordinates. Please try other coordinates or search location directly!') }
       
+      checkIfLocSaved();
       this.setState({ weatherSearched: true });
       this.weatherCntrAnim.play();
 

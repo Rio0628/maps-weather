@@ -23,11 +23,6 @@ const Map = (props) => {
             map.on('dblclick', function(e) {
                 let coordinates = e.lngLat;
                 props.showWthrFromMap(coordinates.lng, coordinates.lat);
-                new mapboxgl.Popup()
-                  .setLngLat(coordinates)
-                  .setHTML('You clicked here')
-                  .addTo(map);
-            
                 //   console.log(coordinates)
                 })
         });
