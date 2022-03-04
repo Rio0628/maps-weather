@@ -36,15 +36,7 @@ const CurrentWeatherBG = (props) => {
         }
     }
 
-    /* 
-        CODE FOR FUTURE FUNCTION TO ELIMINATE EXTRA LINES OF CODE
-
-     {() => { for (let i = 0; i < numPartlyCloudy; i++ ) {
-                    <div className='partlyCloud' ref={addPartlyClouds} key={'cloud' + ( i + 1)}><BsCloudFill /></div>
-                } }}
-    */
-
-    if (props.wthrByIcon === '02n' || props.whtrByIcon === '03d') { console.log('maroi')}
+    // if (props.wthrByIcon === '02n' || props.whtrByIcon === '03d') { console.log('maroi')}
 
     useEffect(() => {
         // console.log(mainRef.current.clientWidth)

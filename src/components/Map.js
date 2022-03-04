@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap'
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = (props) => {
 
-    const mapRef = useRef(null);
+    const mapRef = useRef(null), cntrRef = useRef(null);
 
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ'
 
@@ -13,7 +14,7 @@ const Map = (props) => {
         const map = new mapboxgl.Map({
             container: mapRef.current,
             style: 'mapbox://styles/mapbox/dark-v9',
-            center: [-104.9876, 39.7405],
+            center: [props.viewportLon, props.viewportLat],
             zoom: 10
         });
 
@@ -21,24 +22,24 @@ const Map = (props) => {
         map.on('style.load', function() {
             map.on('dblclick', function(e) {
                 let coordinates = e.lngLat;
+                props.showWthrFromMap(coordinates.lng, coordinates.lat);
                 new mapboxgl.Popup()
                   .setLngLat(coordinates)
-                  .setHTML('you clicked here: <br/>' + coordinates)
+                  .setHTML('You clicked here')
                   .addTo(map);
             
                 //   console.log(coordinates)
-                  props.showWthrFromMap(coordinates.lng, coordinates.lat);
                 })
         });
-        // onClick={props.createMapMarker}
-    
-        // Clean up on unmount
+
+        gsap.fromTo(cntrRef.current, { opacity: 0, z: -1}, { opacity: 1, z: 1, duration: 1, ease: 'expo' } ).play();
+
         return () => map.remove();
-    }, []);
+    }, [props]);
 
 
     return (
-        <div className='mapContainer'>
+        <div className='mapContainer' ref={cntrRef}>
             <div className='map' ref={mapRef} ></div>
         </div>
     );

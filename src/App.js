@@ -12,6 +12,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      viewportLon: -122.4376,
+      viewportLat: 37.7577,
       viewport: { latitude: 37.7577, longitude: -122.4376, width: window.innerWidth, height: window.innerHeight, zoom: 10},
       crrtWeatherSrchd: '',
       allSavedLocs: [],
@@ -84,6 +86,9 @@ class App extends Component {
       this.setState({ weatherSearched: true });
       // this.setState({ weatherViewTrggrd: true });
       this.weatherCntrAnim.play();
+
+      this.setState({ viewportLon: lon });
+      this.setState({ viewportLat: lat });
     }
 
     const saveLocationDB = () => {
@@ -137,26 +142,33 @@ class App extends Component {
 
     const showWthrFromMap = async (lon, lat) => {
       let name;
-      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
-      `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
       
-      await axios.get(`http://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/${lon},${lat}.json?access_token=pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ`).then( data => name = data.data.features)
+      try {
+        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+        `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
+      
+        await axios.get(`http://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/${lon},${lat}.json?access_token=pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ`).then( data => name = data.data.features)
 
-      console.log(name)
-      for (let i = 0; i < name.length; i++) {
-        // console.log(name[i].id.split('.')[0])
-        if (name[i].id.split('.')[0] === 'city') {
-          name = name[i];
+        // console.log(name)
+        for (let i = 0; i < name.length; i++) {
+          // console.log(name[i].id.split('.')[0])
+          if (name[i].id.split('.')[0] === 'city') {
+            name = name[i];
+          }
         }
-      }
-      name = name.text;
+        name = name.text;
 
-      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
-        this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
-      })
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+          this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
+        })
+      
+      } catch { alert('Unable to get weather with current coordinates. Please try other coordinates or search location directly!') }
       
       this.setState({ weatherSearched: true });
       this.weatherCntrAnim.play();
+
+      this.setState({ viewportLon: lon });
+      this.setState({ viewportLat: lat });
     }
 
    
@@ -168,7 +180,7 @@ class App extends Component {
         <SavedLocsCntr savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
-          <Map  showWthrFromMap={showWthrFromMap}/>
+          <Map showWthrFromMap={showWthrFromMap} locationName={this.state.currentWeatherName} viewportLon={this.state.viewportLon} viewportLat={this.state.viewportLat}/>
 
           <div className='headerBtnsContainer'>
             <div className='openMenuBtn' onClick={() => this.savedLocsAnim.play()}><AiOutlineMenu className='logo'/></div>
