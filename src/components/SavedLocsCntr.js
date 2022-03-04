@@ -47,6 +47,11 @@ const SavedLocsCntr = (props) => {
 
     return (
         <div className='savedLocsCntr' ref={cntrRef}>
+            <div className='changeTempSet'>
+                <p className='celsBtn'>°C</p>
+                <p className='fahrBtn'>°F</p>
+            </div>
+
             <div className='returnMainViewBtn' id='savedLocsReturn' onClick={() => props.savedLocsAnim.reverse()}>
                 <p className='returnBtnTxt'>Main View</p>
     

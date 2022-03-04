@@ -63,7 +63,7 @@ class App extends Component {
         }
       }
     }
-    console.log(this.state.currentWeatherName)
+    // console.log(this.state.currentWeatherName)
     const searchWeather = async () => {
       let lon, lat;
       // let weatherCntrAnim = gsap.timeline({ paused: true });
@@ -165,7 +165,7 @@ class App extends Component {
         })
       
       } catch { alert('Unable to get weather with current coordinates. Please try other coordinates or search location directly!') }
-      
+
       checkIfLocSaved();
       this.setState({ weatherSearched: true });
       this.weatherCntrAnim.play();

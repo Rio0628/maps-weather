@@ -131,7 +131,34 @@ code {
   /* transform: translateX(-100rem); */
 }
 
-/* .savedLocsCntr { height: 200%; } */
+.changeTempSet {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem; 
+  width: 6rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  outline: 2px solid #fff;
+  border-radius: 2px;
+  z-index: 4; 
+}
+
+.celsBtn, .fahrBtn {
+  height: 100%;
+  width: 50%;
+  font-family: 'Titillium Web';
+  font-size: 22px;
+  font-weight: 700;
+  display: flex; 
+  letter-spacing: 2px; 
+  justify-content: center;
+  align-items: center;
+  /* outline: 1px solid red; */
+  cursor: pointer;
+}
+
 .savedLocsCntr::-webkit-scrollbar, .wthrInfoCntr::-webkit-scrollbar { width: 10px; }
 
 .savedLocsCntr::-webkit-scrollbar-thumb {
@@ -142,7 +169,7 @@ code {
 .returnMainViewBtn {
   position: absolute;
   right: .8rem;
-  top: 1rem;
+  top: 1.5rem;
   height: 2.5rem;
   width: 9rem;
   display: flex;
@@ -169,13 +196,13 @@ code {
   cursor: pointer;
 }
 
-.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover, .removeMainBtn:hover  {
+.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover, .removeMainBtn:hover, .celsBtn:hover, .fahrBtn:hover  {
   color:#161d1d;
   background: #fff;
   transition: .1s linear;
 }
 
-.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active, .removeMainBtn:active {
+.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active, .removeMainBtn:active, .celsBtn:active, .fahrBtn:active, .celsBtn.active, .fahrBtn.active {
   outline: none;
   color:#fff;
   background: #161d1d;
@@ -801,6 +828,8 @@ code {
 
   .openWeatherBtn { right: -6.9rem; }
 
+  .changeTempSet { left: 4rem; }
+
   .returnMainViewBtn { right: 3.2rem; }
 
   .wthrHrlCntr, .currentWeatherCntr .whtrHrlCntr { width: 87%; }
@@ -881,12 +910,14 @@ code {
     pointer-events: none;
   }
 
+  .changeTempSet { left: 2rem; }
+
   .mainWthrLocCntr {
-    top: .5rem;
+    top: 4rem;
   }
 
   .wthrHrlCntr { 
-    top: 28rem;
+    top: 30rem;
     width: 100%; 
   }
 
