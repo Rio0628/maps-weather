@@ -23,10 +23,10 @@ const Map = (props) => {
             map.on('dblclick', function(e) {
                 let coordinates = e.lngLat;
                 props.showWthrFromMap(coordinates.lng, coordinates.lat);
-                //   console.log(coordinates)
                 })
         });
 
+        // Animation to bring cntr to view
         gsap.fromTo(cntrRef.current, { opacity: 0, z: -1}, { opacity: 1, z: 1, duration: 1, ease: 'expo' } ).play();
 
         return () => map.remove();

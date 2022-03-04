@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { Map, SavedLocsCntr, CurrentWeather } from './components';
-import CurrentWeatherBG from './components/CurrentWeatherBG';
 import icons from './weatherIcons';
 import APIS from './api';
 import axios from 'axios';
@@ -14,7 +13,6 @@ class App extends Component {
     this.state = {
       viewportLon: -122.4376,
       viewportLat: 37.7577,
-      viewport: { latitude: 37.7577, longitude: -122.4376, width: window.innerWidth, height: window.innerHeight, zoom: 10},
       crrtWeatherSrchd: '',
       allSavedLocs: [],
       mainLocation: [],
@@ -29,6 +27,7 @@ class App extends Component {
     this.savedLocsAnim = gsap.timeline({ paused: true });
   }
   
+  // Main function to get current weather for saved locs container 
   async getLocs () {
     let allSavedLocs;
     await APIS.getAllLocs().then(data => allSavedLocs = data.data )
@@ -41,7 +40,6 @@ class App extends Component {
       await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
       `).then(data => { this.setState({ mainLocationWeather: data.data }); this.setState({ mainWthrPrsnt: true }); } );  
     } else { this.setState({ mainLocationWeather: {} }); this.setState({ mainWthrPrsnt: false }); }
-    // console.log(this.state.mainLocationWeather.length)
     
     const allOtherLocs = this.state.allSavedLocs.filter(location => location.setAsMain === false )
     this.setState({ allOtherLocs: allOtherLocs });
@@ -56,18 +54,18 @@ class App extends Component {
   
   render () {
 
+    // Checks if current searched location is within the database so there are no duplicates (Takes away save location functionality)
     const checkIfLocSaved = () => {
-      
       for (let i = 0; i < this.state.allSavedLocs.length; i++) {
         if (this.state.allSavedLocs[i].name === this.state.currentWeatherName) {
           this.setState({ locationSaved: true });
         }
       }
     }
-    // console.log(this.state.currentWeatherName)
+    
+    // Primary function to get weather info from API using the searchbar
     const searchWeather = async () => {
       let lon, lat;
-      // let weatherCntrAnim = gsap.timeline({ paused: true });
   
       this.setState({ locationSaved: false });
 
@@ -75,23 +73,21 @@ class App extends Component {
       await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
         lon = data.data.coord.lon;
         lat = data.data.coord.lat;
-        // console.log(data.data)
         this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
       })
     
       await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
       `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
 
-      // console.log(lon, lat);
       checkIfLocSaved();
       this.setState({ weatherSearched: true });
-      // this.setState({ weatherViewTrggrd: true });
       this.weatherCntrAnim.play();
 
       this.setState({ viewportLon: lon });
       this.setState({ viewportLat: lat });
     }
 
+    // Gathers name, lon, and lat from current weather info and saves it into the database 
     const saveLocationDB = () => {
       const object = {
         name: this.state.currentWeatherName,
@@ -105,19 +101,21 @@ class App extends Component {
       this.getLocs();
     }
 
+    // Show a certain icon according to what icon code the API returns 
     const showWeather = wthr => 
-        wthr === '01d' ? <icons.IoMdSunny className='logo' /> : 
-        wthr === '01n' ? <icons.IoMdMoon className='logo' /> : 
-        wthr === '02d' ? <icons.IoIosPartlySunny className='logo' /> : 
-        wthr === '02n' ? <icons.IoIosCloudyNight className='logo' /> : 
-        wthr === '03d' || wthr === '04d' || wthr === '03n' || wthr === '04n' ? <icons.BsCloudyFill className='logo' /> :
-        wthr === '09d' || wthr === '09n' ? <icons.BsCloudDrizzleFill className='logo' /> :
-        wthr === '10d' || wthr === '10n' ? <icons.IoIosRainy className='logo' /> : 
-        wthr === '11d' || wthr === '11n' ? <icons.IoIosThunderstorm className='logo' /> : 
-        wthr === '13d' || wthr === '13n' ? <icons.BsCloudSnowFill className='logo' /> : 
-        wthr === '50d' || wthr === '50n' ? <icons.WiWindy className='logo' /> :
-        null ;
+      wthr === '01d' ? <icons.IoMdSunny className='logo' /> : 
+      wthr === '01n' ? <icons.IoMdMoon className='logo' /> : 
+      wthr === '02d' ? <icons.IoIosPartlySunny className='logo' /> : 
+      wthr === '02n' ? <icons.IoIosCloudyNight className='logo' /> : 
+      wthr === '03d' || wthr === '04d' || wthr === '03n' || wthr === '04n' ? <icons.BsCloudyFill className='logo' /> :
+      wthr === '09d' || wthr === '09n' ? <icons.BsCloudDrizzleFill className='logo' /> :
+      wthr === '10d' || wthr === '10n' ? <icons.IoIosRainy className='logo' /> : 
+      wthr === '11d' || wthr === '11n' ? <icons.IoIosThunderstorm className='logo' /> : 
+      wthr === '13d' || wthr === '13n' ? <icons.BsCloudSnowFill className='logo' /> : 
+      wthr === '50d' || wthr === '50n' ? <icons.WiWindy className='logo' /> 
+    : null ;
 
+    // Convert timestamp returned from API into normal date (Only using hours) 
     const getTime = (timeStamp, currentTime) => {
       let time = new Date(timeStamp * 1000);
       time = time.getHours();
@@ -132,29 +130,28 @@ class App extends Component {
       else { return `${time} AM`}
     }
 
+    // Delete a location with the loc attribute (id of location)
     const deleteMainLoc = async (e) => {
-      // Delete a location with the loc attribute (id of location)
       console.log(e.target.getAttribute('loc'));
       this.setState({ mainWthrPrsnt: false });
       await APIS.deleteLoc(e.target.getAttribute('loc')).then(res => alert('Location deleted successfully!'));
       this.getLocs();
-      // console.log(mainWthrPrsnt)
     }
 
+    // Searchs for weather with the lon and lat provided by mapbox gl
     const showWthrFromMap = async (lon, lat) => {
       let name;
       
       this.setState({ locationSaved: false });
 
       try {
+        // Will get the name of the current location with the reverse geocoding API from mapbox gl 
         await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
         `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
       
         await axios.get(`http://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/${lon},${lat}.json?access_token=pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ`).then( data => name = data.data.features)
 
-        // console.log(name)
-        for (let i = 0; i < name.length; i++) {
-          // console.log(name[i].id.split('.')[0])
+        for (let i = 0; i < name.length; i++) { // Isolate the city object (Different position with each call)
           if (name[i].id.split('.')[0] === 'city') {
             name = name[i];
           }
@@ -175,19 +172,18 @@ class App extends Component {
       this.setState({ viewportLat: lat });
     }
 
+    // According to the value of the wthrTypeIsC Celsius or Fahrenheit will be displayed
     const changeWeatherType = (temp) => {
-      if (!this.state.wthrTypeIsC) { // Change to celsius
+      if (!this.state.wthrTypeIsC) { 
         let calc = ((temp * 9) / 5) + 32
         return `${calc.toFixed()}°F`
       }
       else return `${temp.toFixed()}°C`
     }
 
+    // CHnage the state that dictates if Celsius or Fahrenheit is being displayed
     const weatherType = () => this.setState({ wthrTypeIsC: !this.state.wthrTypeIsC });
 
-    console.log(this.state.wthrTypeIsC)
-    
-    // console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
 

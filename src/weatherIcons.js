@@ -1,3 +1,8 @@
+
+/*
+    FILE THAT KEEPS ALL REACT-ICONS IMPORTS WITHIN ONE PLACE
+*/
+
 import { IoMdSunny, IoMdMoon, IoIosPartlySunny, IoIosCloudyNight, IoMdSnow, IoIosThunderstorm, IoIosRainy } from 'react-icons/io'
 import { TiWeatherNight, TiWeatherSnow } from 'react-icons/ti';
 import { BsCloudDrizzleFill, BsCloudSnowFill, BsCloudyFill } from 'react-icons/bs'

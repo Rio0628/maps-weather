@@ -15,42 +15,38 @@ const CurrentWeatherBG = (props) => {
     const mainRef = useRef(null);
     const [ cntrWidth, setCntrWidth ] = useState();
 
-    const numPartlyCloudy = 7;
-
+    // Get ref of all different objects
     const addPartlyClouds = (el) => {
         if (el && !cloudref.current.includes(el)) {
             cloudref.current.push(el);
         }
-        // console.log(cloudref.current)
     }
 
+    // Get ref of all different objects
     const addDropsRef = (el) => {
         if (el && !dropsRef.current.includes(el)) {
             dropsRef.current.push(el);
         }
     }
 
+    // Get ref of all different objects
     const addMistRef = (el) => {
         if (el && !mistRef.current.includes(el)) {
             mistRef.current.push(el);
         }
     }
 
-    // if (props.wthrByIcon === '02n' || props.whtrByIcon === '03d') { console.log('maroi')}
-
     useEffect(() => {
-        // console.log(mainRef.current.clientWidth)
         setCntrWidth(mainRef.current.clientWidth);
-        // console.log(sunMoonRef.current)    
 
         // Sunny background
-        if (props.whtrByIcon === '01d' || props.whtrByIcon === '01n') {
+        if (props.wthrByIcon === '01d' || props.wthrByIcon === '01n') {
             gsap.to(sunMoonRef.current, { rotation: '45', yoyo: true, ease: 'none', duration: 11, repeat: -1});
         }
         
 
         // Partly Cloudy Animations
-        if (props.wthrByIcon === '02d' || props.wthrByIcon === '02n' || props.wthrByIcon === '09d' || props.whtrByIcon === '09n') {
+        if (props.wthrByIcon === '02d' || props.wthrByIcon === '02n' || props.wthrByIcon === '09d' || props.wthrByIcon === '09n') {
             cloudref.current.forEach( (el) => {
                 gsap.to(el, { x: '+=100', ease: 'none', yoyo: true, repeat: -1, duration: 11 })
             });
@@ -63,7 +59,7 @@ const CurrentWeatherBG = (props) => {
         });
 
         // Drizzle Animations
-        if (props.wthrByIcon === '09d' || props.whtrByIcon === '09n') {
+        if (props.wthrByIcon === '09d' || props.wthrByIcon === '09n') {
             dropsRef.current.forEach( (el) => {
                 gsap.to(el, { y: window.innerHeight, ease: 'none', repeat: -1, duration: (Math.random() * 11) + 2 })
             });
@@ -77,12 +73,12 @@ const CurrentWeatherBG = (props) => {
         }
 
         // Mist Animations
-        if (props.whtrByIcon === '50d' || props.whtrByIcon === '50n') {
+        if (props.wthrByIcon === '50d' || props.wthrByIcon === '50n') {
             mistRef.current.forEach( (el) => {
                 gsap.to(el, { x: -30, ease: 'none', yoyo: true, repeat: -1, duration: 5});
             });    
         }
-    }, [setCntrWidth]);
+    }, [setCntrWidth, props.wthrByIcon]);
 
     return (
         <div className='animBG' ref={mainRef}>
@@ -146,7 +142,7 @@ const CurrentWeatherBG = (props) => {
                 </div> 
             : null }
 
-            { props.wthrByIcon === '09d' || props.whtrByIcon === '09n' ?
+            { props.wthrByIcon === '09d' || props.wthrByIcon === '09n' ?
                 <div className='BG drizzle'>
                     <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
                     <div className='partlyCloud' ref={addPartlyClouds}><BsCloudFill /></div>
@@ -284,7 +280,7 @@ const CurrentWeatherBG = (props) => {
                 </div>
             : null }
 
-            { props.wthrByIcon === '50d' || props.whtrByIcon === '50n' ?
+            { props.wthrByIcon === '50d' || props.wthrByIcon === '50n' ?
                 <div className='BG rain'>
                     <div className='mist' ref={addMistRef} ><WiWindy /></div>
                     <div className='mist' ref={addMistRef} ><WiWindy /></div>

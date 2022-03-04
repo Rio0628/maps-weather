@@ -20,30 +20,30 @@ const SavedLocsCntr = (props) => {
         const newMainLocation = await props.allOtherLocs.filter(location => location.id.toString() === e.target.getAttribute('loc'));
         newMainLocation[0].setAsMain = true;
 
-        if (mainWthrPrsnt) { await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!')) } 
+        // Conditional to get info once the API returns the data
+        await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!'))  
         await APIS.updateLoc(newMainLocation[0].id, newMainLocation[0]).then(res => console.log('Location updated successfully!'));
-        // props.getMainWeather(mainLocation);
         props.getLocs();
     }
 
+    // Delete a location with the loc attribute (id of location)
     const deleteLoc = async (e) => {
-        // Delete a location with the loc attribute (id of location)
-        console.log(e.target.getAttribute('loc'));
         await APIS.deleteLoc(e.target.getAttribute('loc')).then(res => alert('Location deleted successfully!'));
         props.getLocs();
     }
 
     let hourly, currentTime;
 
+    // Conditional to get info once the API returns the data
     if (mainWthrPrsnt)  {
         hourly = props.mainLocationWeather.hourly.slice(0, 24);
         currentTime = new Date(props.mainLocationWeather.current.dt * 1000)
     }
 
     useEffect(() => {
-        // console.log(cntrRef)
+        // Animation to bring cntr to view
         props.savedLocsAnim.to(cntrRef.current, { opacity: 1, left: 0, duration: .5, ease: 'none' })
-    }, []);
+    }, [props.savedLocsAnim]);
 
     return (
         <div className='savedLocsCntr' ref={cntrRef}>

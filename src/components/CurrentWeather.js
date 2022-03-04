@@ -1,28 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import { MdArrowBackIos } from 'react-icons/md';
-import { TiWeatherCloudy } from 'react-icons/ti';
 import CurrentWeatherBG from './CurrentWeatherBG';
-import gsap from 'gsap';
 
 const CurrentWeather = (props) => {
 
     const cntrRef = useRef(null);
-    let cntrAnim = gsap.timeline({ paused: true });
 
     useEffect(() => {
+        // Animation to bring cntr to view
         props.weatherAnim.to(cntrRef.current, { opacity: 1, x: 0, duration: .5, ease: 'none' })
-    }, []);
+    }, [props.weatherAnim]);
 
-    // console.log(props.weather)
-    // const test = new Date(props.weather.current.dt * 1000);
-    // console.log(test)
-    // console.log(test.getHours() - 12)
+    // Conditional that performs necessary functions once the API return the information
     let currentTime, hourly;
     if (props.weatherSearched) { 
         currentTime = new Date(props.weather.current.dt * 1000); 
         hourly = props.weather.hourly.slice(0, 24);
     }
 
+    // Receives timestamp and return an actual date object (Only using the day)
     const getDay = (date) => {
         let currentDay = currentTime.toString().split(' ');
         let day = new Date(date * 1000);
@@ -30,9 +26,7 @@ const CurrentWeather = (props) => {
 
         if (day[2] === currentDay[2]) return 'Today'
         else return day[0]
-    }
-    // console.log(currentTime)
-    
+    }    
 
     return (
         <div className='currentWeatherCntr' ref={cntrRef}>
