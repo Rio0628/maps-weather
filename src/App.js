@@ -88,7 +88,7 @@ class App extends Component {
     }
 
     // Gathers name, lon, and lat from current weather info and saves it into the database 
-    const saveLocationDB = () => {
+    const saveLocationDB = async () => {
       const object = {
         name: this.state.currentWeatherName,
         long: this.state.crrtWeatherSrchd.lon,
@@ -98,7 +98,7 @@ class App extends Component {
 
       APIS.createLoc(object).then(res => alert('Location Added Succesfully!'));
       this.setState({ locationSaved: true });
-      this.getLocs();
+      await this.getLocs();
     }
 
     // Show a certain icon according to what icon code the API returns 

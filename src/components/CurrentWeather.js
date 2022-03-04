@@ -60,7 +60,7 @@ const CurrentWeather = (props) => {
 
                                 <div className='indHrlIcon'>{props.showWeather(hour.weather[0].icon)}</div>
 
-                                <p className='frcstTemp'>{props.changeWeatherType(hour.temp)}°C</p>
+                                <p className='frcstTemp'>{props.changeWeatherType(hour.temp)}</p>
                             </div>
                         )}
                 
@@ -75,9 +75,9 @@ const CurrentWeather = (props) => {
 
                                 <div className='WthrIcon'>{props.showWeather(day.weather[0].icon)}</div>
 
-                                <p className='lowTemp'>{props.changeWeatherType(day.temp.min)}°C</p>
+                                <p className='lowTemp'>{props.changeWeatherType(day.temp.min)}</p>
 
-                                <p className='highTemp'>{props.changeWeatherType(day.temp.max)}°C</p>
+                                <p className='highTemp'>{props.changeWeatherType(day.temp.max)}</p>
                             </div>
                         )}
                     </div>
