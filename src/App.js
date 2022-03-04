@@ -21,7 +21,8 @@ class App extends Component {
       allOtherLocs: [],
       inputSearchbar: '',
       weatherSearched: false,
-      locationSaved: false 
+      locationSaved: false,
+      wthrTypeIsC: true
     }
     this.getLocs = this.getLocs.bind(this);
     this.weatherCntrAnim = gsap.timeline({ paused: true });
@@ -174,13 +175,23 @@ class App extends Component {
       this.setState({ viewportLat: lat });
     }
 
-   
+    const changeWeatherType = (temp) => {
+      if (!this.state.wthrTypeIsC) { // Change to celsius
+        let calc = ((temp * 9) / 5) + 32
+        return `${calc.toFixed()}°F`
+      }
+      else return `${temp.toFixed()}°C`
+    }
+
+    const weatherType = () => this.setState({ wthrTypeIsC: !this.state.wthrTypeIsC });
+
+    console.log(this.state.wthrTypeIsC)
     
     // console.log(this.state.crrtWeatherSrchd)
     return (
       <div className="container">
 
-        <SavedLocsCntr savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
+        <SavedLocsCntr wthrTypeIsC={this.state.wthrTypeIsC} weatherType={weatherType} changeWeatherType={changeWeatherType} savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
           <Map showWthrFromMap={showWthrFromMap} locationName={this.state.currentWeatherName} viewportLon={this.state.viewportLon} viewportLat={this.state.viewportLat}/>
@@ -196,7 +207,7 @@ class App extends Component {
           <div className='cntrOpenWeather'><div className='openWeatherBtn' onClick={() =>  this.weatherCntrAnim.play() }><TiWeatherCloudy className='logo' /></div></div>
         </div>
 
-        <CurrentWeather locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved}/>
+        <CurrentWeather changeWeatherType={changeWeatherType} locationName={this.state.currentWeatherName} weather={this.state.crrtWeatherSrchd} weatherSearched={this.state.weatherSearched} weatherAnim={this.weatherCntrAnim} saveLocation={saveLocationDB} getTime={getTime} showWeather={showWeather} newLocSaved={this.state.locationSaved}/>
 
 
       </div>

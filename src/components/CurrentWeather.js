@@ -52,7 +52,7 @@ const CurrentWeather = (props) => {
 
                         <div className='locCrrntWthr'>{props.showWeather(props.weather.current.weather[0].icon)}</div>
 
-                        <p className='crrntWthr'>{props.weather.current.temp.toFixed()}°C</p>
+                        <p className='crrntWthr'>{props.changeWeatherType(props.weather.current.temp)}</p>
 
                         <p className='crrntWthrTxt'>{props.weather.current.weather[0].main}</p>
                     
@@ -66,7 +66,7 @@ const CurrentWeather = (props) => {
 
                                 <div className='indHrlIcon'>{props.showWeather(hour.weather[0].icon)}</div>
 
-                                <p className='frcstTemp'>{hour.temp.toFixed()}°C</p>
+                                <p className='frcstTemp'>{props.changeWeatherType(hour.temp)}°C</p>
                             </div>
                         )}
                 
@@ -81,9 +81,9 @@ const CurrentWeather = (props) => {
 
                                 <div className='WthrIcon'>{props.showWeather(day.weather[0].icon)}</div>
 
-                                <p className='lowTemp'>{day.temp.min.toFixed()}°C</p>
+                                <p className='lowTemp'>{props.changeWeatherType(day.temp.min)}°C</p>
 
-                                <p className='highTemp'>{day.temp.max.toFixed()}°C</p>
+                                <p className='highTemp'>{props.changeWeatherType(day.temp.max)}°C</p>
                             </div>
                         )}
                     </div>

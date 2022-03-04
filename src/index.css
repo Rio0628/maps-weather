@@ -196,13 +196,15 @@ code {
   cursor: pointer;
 }
 
-.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover, .removeMainBtn:hover, .celsBtn:hover, .fahrBtn:hover  {
+.returnMainViewBtn:hover, .setLocMain:hover, .removeLocBtn:hover, .saveWthrLocBtn:hover, .searchBtn:hover, .openWeatherBtn:hover, .removeMainBtn:hover, .celsBtn:hover, .fahrBtn:hover, .celsBtn.active, .fahrBtn.active  {
   color:#161d1d;
   background: #fff;
   transition: .1s linear;
 }
 
-.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active, .removeMainBtn:active, .celsBtn:active, .fahrBtn:active, .celsBtn.active, .fahrBtn.active {
+.celsBtn.active, .fahrBtn.active { pointer-events: none; }
+
+.returnMainViewBtn:active, .setLocMain:active, .removeLocBtn:active, .saveWthrLocBtn:active, .searchBtn:active, .openWeatherBtn:active, .removeMainBtn:active, .celsBtn:active, .fahrBtn:active {
   outline: none;
   color:#fff;
   background: #161d1d;

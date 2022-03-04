@@ -41,15 +41,15 @@ const SavedLocsCntr = (props) => {
     }
 
     useEffect(() => {
-        console.log(cntrRef)
+        // console.log(cntrRef)
         props.savedLocsAnim.to(cntrRef.current, { opacity: 1, left: 0, duration: .5, ease: 'none' })
     }, []);
 
     return (
         <div className='savedLocsCntr' ref={cntrRef}>
             <div className='changeTempSet'>
-                <p className='celsBtn'>°C</p>
-                <p className='fahrBtn'>°F</p>
+                <p className={props.wthrTypeIsC ? 'celsBtn active' : 'celsBtn'} onClick={props.weatherType}>°C</p>
+                <p className={!props.wthrTypeIsC ? 'fahrBtn active' : 'fahrBtn'} onClick={props.weatherType}>°F</p>
             </div>
 
             <div className='returnMainViewBtn' id='savedLocsReturn' onClick={() => props.savedLocsAnim.reverse()}>
@@ -64,7 +64,7 @@ const SavedLocsCntr = (props) => {
 
                     <div className='locCrrntWthr'>{props.showWeather(props.mainLocationWeather.current.weather[0].icon)}</div>
 
-                    <p className='crrntWthr'>{props.mainLocationWeather.current.temp.toFixed()}</p>
+                    <p className='crrntWthr'>{props.changeWeatherType(props.mainLocationWeather.current.temp)}</p>
 
                     <p className='crrntWthrTxt'>{props.mainLocationWeather.current.weather[0].main}</p>
 
@@ -80,7 +80,7 @@ const SavedLocsCntr = (props) => {
 
                             <div className='indHrlIcon'>{props.showWeather(hour.weather[0].icon)}</div>
     
-                            <p className='frcstTemp'>{hour.temp.toFixed()}*C</p>
+                            <p className='frcstTemp'>{props.changeWeatherType(hour.temp)}</p>
                         </div>  
                     )}            
                 </div>
