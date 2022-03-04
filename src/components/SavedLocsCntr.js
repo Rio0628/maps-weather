@@ -21,7 +21,7 @@ const SavedLocsCntr = (props) => {
         newMainLocation[0].setAsMain = true;
 
         // Conditional to get info once the API returns the data
-        await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!'))  
+        if (mainWthrPrsnt) { await APIS.updateLoc(mainLocation.id, mainLocation).then(res => console.log('location updated!'))  }
         await APIS.updateLoc(newMainLocation[0].id, newMainLocation[0]).then(res => console.log('Location updated successfully!'));
         props.getLocs();
     }

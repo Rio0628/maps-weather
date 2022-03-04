@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const db = require('./server/models');
+const buildPath = path.join(__dirname, 'build');
 
 db.sequelize.sync();
 
@@ -9,9 +11,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Hello World!' });
-})
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(buildPath));
+    app.get('/', (req, res) => { res.sendFile(path.resolve(buildPath, 'index.html')) });
+} else {
+    app.get('/', (req, res) => {
+        res.json({ message: 'Hello World!' });
+    })
+}
 
 require('./server/routes/location.routes')(app);
 
