@@ -69,22 +69,24 @@ class App extends Component {
   
       this.setState({ locationSaved: false });
 
-      // Initial Axios call to retrieve lon and lat 
-      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=miami&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
-        lon = data.data.coord.lon;
-        lat = data.data.coord.lat;
-        this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
-      })
-    
-      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
-      `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
-
-      checkIfLocSaved();
-      this.setState({ weatherSearched: true });
-      this.weatherCntrAnim.play();
-
-      this.setState({ viewportLon: lon });
-      this.setState({ viewportLat: lat });
+      // Initial Axios call to retrieve lon and lat
+      try {
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q${this.state.inputSearchbar}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+          lon = data.data.coord.lon;
+          lat = data.data.coord.lat;
+          this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
+        })
+      
+        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+        `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
+  
+        checkIfLocSaved();
+        this.setState({ weatherSearched: true });
+        this.weatherCntrAnim.play();
+  
+        this.setState({ viewportLon: lon });
+        this.setState({ viewportLat: lat });
+      } catch { alert('Please enter a valid location!'); }
     }
 
     // Gathers name, lon, and lat from current weather info and saves it into the database 
