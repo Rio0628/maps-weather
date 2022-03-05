@@ -32,7 +32,7 @@
   "scripts": {
     "postinstall": "serve -s build",
     "server": "nodemon index.js",
-    "start": "node index.js",
+    "start": "serve -s build",
     "dev": "concurrently \"set PORT=8000 && react-scripts --openssl-legacy-provider start\" \"nodemon index.js\"",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
