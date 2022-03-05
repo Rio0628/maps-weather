@@ -5,7 +5,7 @@ const app = express();
 const db = require('./server/models');
 const buildPath = path.join(__dirname, 'build');
 
-db.sequelize.sync();
+
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +19,8 @@ if (process.env.NODE_ENV === 'production') {
         res.json({ message: 'Hello World!' });
     })
 }
+
+db.sequelize.sync();
 
 require('./server/routes/location.routes')(app);
 
