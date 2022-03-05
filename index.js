@@ -26,6 +26,6 @@ require('./server/routes/location.routes')(app);
 
 const PORT =  process.env.PORT || 8080;
 
-app.listen( process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
