@@ -71,7 +71,7 @@ class App extends Component {
 
       // Initial Axios call to retrieve lon and lat
       try {
-        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q${this.state.inputSearchbar}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.inputSearchbar}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
           lon = data.data.coord.lon;
           lat = data.data.coord.lat;
           this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
@@ -167,6 +167,7 @@ class App extends Component {
       } catch { alert('Unable to get weather with current coordinates. Please try other coordinates or search location directly!') }
 
       checkIfLocSaved();
+      this.getLocs();
       this.setState({ weatherSearched: true });
       this.weatherCntrAnim.play();
 
