@@ -226,6 +226,8 @@ code {
   transition: .5s linear;
 }
 
+.wthrLocName { cursor: pointer; }
+
 .noMainLoc {
   position: relative;
   top: 5rem;

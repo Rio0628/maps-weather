@@ -37,7 +37,7 @@ class App extends Component {
     this.setState({ mainLocation: mainLocation[0] });
     
     if (mainLocation[0]) {
-      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+      await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${mainLocation[0].lat}&lon=${mainLocation[0].long}&exclude=minutely&units=metric&appid=155ed3e3c7720c47890625b4e9b98698
       `).then(data => { this.setState({ mainLocationWeather: data.data }); this.setState({ mainWthrPrsnt: true }); } );  
     } else { this.setState({ mainLocationWeather: {} }); this.setState({ mainWthrPrsnt: false }); }
     
@@ -71,13 +71,13 @@ class App extends Component {
 
       // Initial Axios call to retrieve lon and lat
       try {
-        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.inputSearchbar}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.inputSearchbar}&appid=155ed3e3c7720c47890625b4e9b98698&units=metric`).then(data => {
           lon = data.data.coord.lon;
           lat = data.data.coord.lat;
           this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
         })
       
-        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=155ed3e3c7720c47890625b4e9b98698
         `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
   
         checkIfLocSaved();
@@ -148,7 +148,7 @@ class App extends Component {
 
       try {
         // Will get the name of the current location with the reverse geocoding API from mapbox gl 
-        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+        await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=155ed3e3c7720c47890625b4e9b98698
         `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
       
         await axios.get(`http://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/${lon},${lat}.json?access_token=pk.eyJ1IjoibWFyaW9tZG9tZW5lY2giLCJhIjoiY2wwMXNqMzM4MHhlODNjbWx3aW95MTZqYiJ9.uVERxbdkPqvpiMcJLzimpQ`).then( data => name = data.data.features)
@@ -160,7 +160,7 @@ class App extends Component {
         }
         name = name.text;
 
-        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=f0caa45808a9789d4f46776484b799e2&units=metric`).then(data => {
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=155ed3e3c7720c47890625b4e9b98698&units=metric`).then(data => {
           this.setState({ currentWeatherName: `${data.data.name}, ${data.data.sys.country}`});
         })
       
@@ -175,12 +175,13 @@ class App extends Component {
       this.setState({ viewportLat: lat });
     }
 
+    // Searchs for weather with the information provided by the saved loc
     const searchWeatherSavedLoc = async (e) => {
         try {
-          await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${e.target.getAttribute('lat')}&lon=${e.target.getAttribute('lon')}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+          await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${e.target.getAttribute('lat')}&lon=${e.target.getAttribute('lon')}&exclude=minutely&units=metric&appid=155ed3e3c7720c47890625b4e9b98698
           `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
 
-          this.setState({ currentWeatherName: e.target.getAttribute('location') });
+          this.setState({ currentWeatherName: e.target.getAttribute('name') });
           
           checkIfLocSaved();
           this.setState({ weatherSearched: true });
