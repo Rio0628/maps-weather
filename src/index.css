@@ -840,7 +840,7 @@ code {
   .mainWthrLocCntr { top: 4rem; }
 
   .wthrHrlCntr { 
-    top: 30rem;
+    top: 33rem;
     width: 100%; 
   }
 
@@ -849,6 +849,8 @@ code {
     width: 90%;
   }
  
+  .othrSavedLocsCntr { top: 20rem; }
+
   .locationsCntr { width: 125%; }
 
   .openWeatherBtn {
