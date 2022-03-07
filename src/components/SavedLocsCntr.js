@@ -6,6 +6,9 @@ const SavedLocsCntr = (props) => {
 
     //  Function to get weather of main location
     let mainWthrPrsnt = props.mainWthrPrsnt, cntrRef = useRef(null);
+        
+    console.log(props.allOtherLocs);
+    console.log(props.mainLocation); 
 
     const setLocAsMain = async (e) => {
         // Set current main location to a normal location
@@ -60,7 +63,7 @@ const SavedLocsCntr = (props) => {
 
             { props.mainWthrPrsnt === true ?
                 <div className='mainWthrLocCntr'>
-                    <p className='wthrLocName'>{props.mainLocation.name}</p>
+                    <p className='wthrLocName' lon={props.mainLocation.long} lat={props.mainLocation.lat} name={props.mainLocation.name} onClick={props.searchWeatherSavedLoc}>{props.mainLocation.name}</p>
 
                     <div className='locCrrntWthr'>{props.showWeather(props.mainLocationWeather.current.weather[0].icon)}</div>
 
@@ -93,7 +96,7 @@ const SavedLocsCntr = (props) => {
                 <div className='locationsCntr'>
                     { props.allOtherLocs.map(location => 
                         <div className='indSavedLoc' key={`location ${location.long} ${location.lat}`}>
-                            <p className='locName'>{location.name}</p>
+                            <p className='locName' lon={location.long} lat={location.lat} name={location.name} onClick={props.searchWeatherSavedLoc}>{location.name}</p>
 
                             <div className='indLocBtns'>
 

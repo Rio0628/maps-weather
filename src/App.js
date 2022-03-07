@@ -175,6 +175,23 @@ class App extends Component {
       this.setState({ viewportLat: lat });
     }
 
+    const searchWeatherSavedLoc = async (e) => {
+        try {
+          await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${e.target.getAttribute('lat')}&lon=${e.target.getAttribute('lon')}&exclude=minutely&units=metric&appid=4439be80c1f0ade164109e2399a51173
+          `).then(data => this.setState({ crrtWeatherSrchd: data.data }) );
+
+          this.setState({ currentWeatherName: e.target.getAttribute('location') });
+          
+          checkIfLocSaved();
+          this.setState({ weatherSearched: true });
+          this.weatherCntrAnim.play();
+
+          this.setState({ viewportLon: e.target.getAttribute('lon') });
+          this.setState({ viewportLat: e.target.getAttribute('lat') });
+
+        } catch { alert('Something went wrong! Please try again!'); }
+    }
+
     // According to the value of the wthrTypeIsC Celsius or Fahrenheit will be displayed
     const changeWeatherType = (temp) => {
       if (!this.state.wthrTypeIsC) { 
@@ -190,7 +207,7 @@ class App extends Component {
     return (
       <div className="container">
 
-        <SavedLocsCntr wthrTypeIsC={this.state.wthrTypeIsC} weatherType={weatherType} changeWeatherType={changeWeatherType} savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
+        <SavedLocsCntr searchWeatherSavedLoc={searchWeatherSavedLoc} wthrTypeIsC={this.state.wthrTypeIsC} weatherType={weatherType} changeWeatherType={changeWeatherType} savedLocsAnim={this.savedLocsAnim} mainLocation={this.state.mainLocation} mainLocationWeather={this.state.mainLocationWeather} allOtherLocs={this.state.allOtherLocs} showWeather={showWeather} getTime={getTime} getLocs={this.getLocs} deleteMainLoc={deleteMainLoc} mainWthrPrsnt={this.state.mainWthrPrsnt} />
 
         <div className='map-headerCntr'>
           <Map showWthrFromMap={showWthrFromMap} locationName={this.state.currentWeatherName} viewportLon={this.state.viewportLon} viewportLat={this.state.viewportLat}/>
